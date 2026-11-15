@@ -1,0 +1,51 @@
+/* Casera — tokens de diseño compartidos por la web, la app y el panel. */
+:root {
+  /* Color: las horas de una compra en el mercado */
+  --madrugada: #1b1640; /* cielo de las 4:30, texto principal */
+  --madrugada-2: #2c2168; /* cielo que empieza a aclarar */
+  --buganvilla: #d4186c; /* color de marca: la flor de Tacna */
+  --buganvilla-osc: #a80f54;
+  --aji: #f5b700; /* ají amarillo: acento y sol */
+  --culantro: #1f7a4d; /* confirmaciones y frescura */
+  --alba: #ffe9e4; /* cielo rosa del amanecer */
+  --papel: #fffaf6; /* luz de día, fondo de lectura */
+  --tinta-suave: #5b557a; /* texto secundario sobre claro */
+  --niebla: #cfc8f2; /* texto secundario sobre madrugada */
+  --linea: rgb(27 22 64 / 0.14);
+
+  /* Tipografía (cada app carga las familias y define estas dos variables) */
+  --f-titulo: var(--font-titulo), "Arial Narrow", sans-serif;
+  --f-texto: var(--font-texto), system-ui, sans-serif;
+
+  --t-xs: 0.8125rem;
+  --t-sm: 0.9375rem;
+  --t-base: 1.0625rem;
+  --t-lg: 1.3125rem;
+  --t-xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  --t-2xl: clamp(2.4rem, 1.4rem + 4.4vw, 4.75rem);
+  --t-3xl: clamp(3.1rem, 1rem + 9.6vw, 9.5rem);
+
+  /* Espacio */
+  --e-1: 0.25rem;
+  --e-2: 0.5rem;
+  --e-3: 0.75rem;
+  --e-4: 1rem;
+  --e-5: 1.5rem;
+  --e-6: 2rem;
+  --e-7: 3rem;
+  --e-8: 4.5rem;
+  --e-9: 7rem;
+  --e-10: 10rem;
+
+  --margen: clamp(1.25rem, 5vw, 4.5rem);
+  --ancho: 78rem;
+
+  /* Forma: el radio comunica jerarquía; no se usa uno solo para todo */
+  --r-chico: 0.5rem;
+  --r-medio: 1.25rem;
+  --r-grande: 2.5rem;
+  --r-pastilla: 999px;
+
+  --suave: cubic-bezier(0.22, 1, 0.36, 1);
+  --foco: 3px solid var(--aji);
+}
