@@ -1,17 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google";
-import { MARCA } from "@casera/ui";
-import "@casera/ui/tokens.css";
+import { Bodoni_Moda, Schibsted_Grotesk } from "next/font/google";
+import { MARCA } from "@illari/ui";
+import "@illari/ui/tokens.css";
 import "./globals.css";
 
-const titulo = Bricolage_Grotesque({
+const titulo = Bodoni_Moda({
   subsets: ["latin"],
-  axes: ["wdth"],
+  style: ["normal", "italic"],
   variable: "--font-titulo",
   display: "swap",
 });
 
-const texto = Hanken_Grotesk({
+const texto = Schibsted_Grotesk({
   subsets: ["latin"],
   variable: "--font-texto",
   display: "swap",
@@ -20,9 +20,9 @@ const texto = Hanken_Grotesk({
 export const metadata: Metadata = {
   title: `${MARCA.nombre} — compras del ${MARCA.mercado} por encargo en ${MARCA.ciudad}`,
   description:
-    "Una compradora que conoce el Mercado Grau elige tus frutas, verduras, carnes y abarrotes como para su casa. Tú los recibes en la tuya o los recoges en el mercado.",
+    "Mientras duermes, hacemos tu mercado. Una compradora que conoce el Mercado Grau elige tus frutas, verduras, carnes y abarrotes, y te los lleva a casa.",
   openGraph: {
-    title: `${MARCA.nombre} — nosotras madrugamos por ti`,
+    title: `${MARCA.nombre} — mientras duermes, hacemos tu mercado`,
     description: MARCA.lema,
     locale: "es_PE",
     type: "website",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1b1640",
+  themeColor: "#ffe9dc",
   width: "device-width",
   initialScale: 1,
 };

@@ -1,10 +1,10 @@
 {
-  "name": "casera",
+  "name": "illari",
   "private": true,
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "dev": "npm run dev -w @casera/web",
-    "build": "npm run build -w @casera/web",
+    "dev": "npm run dev -w @illari/web",
+    "build": "npm run build -w @illari/web",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present"
   }

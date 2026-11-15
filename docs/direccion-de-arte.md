@@ -1,16 +1,22 @@
 # Dirección de arte
 
-## Concepto: de la madrugada a tu mesa
+## Concepto: mientras duermes, hacemos tu mercado
 
-El servicio existe porque alguien se levanta a las cuatro para que el cliente no tenga que hacerlo. La marca cuenta ese viaje: la página empieza de noche, amanece mientras se baja y termina con luz de día. El sol de la cabecera recorre su arco con el scroll.
+El servicio existe porque alguien madruga para que el cliente no tenga que hacerlo. La página lo cuenta como una película corta: la pantalla queda fija y el scroll hace avanzar la escena hasta que amanece.
 
-**Nombre de trabajo: Casera.** En el Perú, "casera" es la vendedora de confianza y también la clienta fiel. Nombra la relación que el negocio vende. Pendiente de confirmación.
+**Nombre: Illari**, "amanecer" en quechua. Propuesto por Claude; pendiente de confirmación de la dueña. El personaje guía se llama **Illa**.
+
+## Decisiones de la dueña (no negociables)
+
+- **Sin fondos oscuros.** Todos los fondos son claros. El verde profundo se usa solo para texto.
+- **Nada genérico:** no ilustraciones planas, no secciones apiladas como plantilla, no poco movimiento.
+- Dirección elegida: **cinematográfica 3D**.
 
 ## Lo que se tomó de las referencias
 
-- **Shopify Editions:** cada pieza es un objeto con ilustración propia, expuesto como en una repisa. De ahí salen los productos ilustrados y en órbita, en lugar de fotos de banco de imágenes.
-- **KHY:** una sola escena a pantalla completa, tipografía contenida y mucho aire. De ahí la portada con una única idea.
-- **Kylie Cosmetics:** un color saturado que es dueño de la marca. De ahí el buganvilla, usado a todo color en un solo bloque.
+- **Shopify Editions:** objetos con presencia propia, expuestos en repisa. De ahí la escena final con los productos ordenados en dos filas.
+- **KHY:** una sola idea a pantalla completa, tipografía fina y mucho aire.
+- **Kylie Cosmetics:** fondos rosados claros y producto brillante como protagonista.
 
 No se copió composición, tipografía ni color de ninguna.
 
@@ -18,33 +24,38 @@ No se copió composición, tipografía ni color de ninguna.
 
 | Nombre | Hex | Rol |
 |---|---|---|
-| Madrugada | `#1b1640` | Cielo de la portada, texto principal, cabecera |
-| Buganvilla | `#d4186c` | Color de marca (la flor de Tacna): acción principal y bloque del criterio |
-| Ají | `#f5b700` | El sol: llamada a la acción sobre oscuro, foco, acentos |
-| Culantro | `#1f7a4d` | Confirmaciones y estados correctos (app y panel) |
-| Alba | `#ffe9e4` | Cielo rosa del amanecer: superficies suaves |
-| Papel | `#fffaf6` | Fondo de lectura a plena luz |
+| Papel | `#fffcf7` | Fondo de lectura |
+| Alba | `#ffe9dc` | Rosa del amanecer: apertura |
+| Durazno claro | `#ffe3c8` | Superficie cálida (pasos, pie) |
+| Menta | `#ddefe6` | Superficie fresca (quién compra) |
+| Durazno | `#ffb56b` | La primera luz: fin del amanecer y acentos |
+| Menta viva / Limón | `#a9dfc6` / `#f2e277` | Tarjetas del carrusel |
+| Tomate | `#e5391f` | Acción principal y números |
+| Tinta | `#0b2b24` | Verde profundo, solo texto |
 
 ## Tipografía
 
-- **Bricolage Grotesque**, estrecha (75 %) y pesada (800), para títulos. Recuerda los letreros pintados de los puestos: apretados, grandes, sin adornos.
-- **Hanken Grotesk** para texto. Neutra y muy legible en celulares modestos.
-- Títulos en frases completas con punto final. Sin etiquetas en mayúsculas ni palabras sueltas resaltadas.
+- **Bodoni Moda** para títulos: fina, de alto contraste, en redonda y cursiva. Enorme, como cabecera de revista.
+- **Schibsted Grotesk** para texto y controles.
+- Títulos en frases completas. Sin etiquetas en mayúsculas.
 
-## Composición
+## Estructura: escenas, no secciones apiladas
 
-Alineación a la izquierda, asimétrica. Pocas cajas: las listas se separan con líneas gruesas, como renglones de cuaderno de cuentas. El radio cambia según la jerarquía (pastilla para acciones, grande para superficies).
+1. **Apertura fija en tres actos** (3D): racimo de productos girando → vuelo entre los productos → repisa al amanecer. El fondo pasa de rosa a durazno.
+2. **Manifiesto:** una frase grande.
+3. **Formas de comprar:** carrusel horizontal que avanza con el scroll.
+4. **Cómo funciona:** pantalla fija con un número gigante que cambia del 1 al 4.
+5. **Quién compra:** Illa en 3D, cinta de palabras en movimiento y los tres criterios.
+6. **Pedir:** formulario que abre WhatsApp con el pedido escrito.
 
-## Elementos propios
+## 3D
 
-1. **La órbita:** la compra gira alrededor de la casera y se acelera con el scroll.
-2. **El amanecer:** franja de cielo con el sol saliendo detrás de los toldos del mercado.
-3. **La casera:** personaje guía. Comenta cada sección en la web y acompañará los estados de la app (vacío, éxito, espera).
+Todo está modelado con geometría propia en Three.js (`apps/web/src/tres`): no hay modelos ni texturas descargadas. Materiales con barniz para el brillo, iluminación de estudio propia. Los lienzos solo dibujan cuando están a la vista.
 
 ## Movimiento
 
-Cada animación tiene una función: la órbita presenta el producto, el sol indica avance, la línea de pasos marca lectura, los cambios de panel muestran qué cambió. Con `prefers-reduced-motion` todo queda quieto y visible.
+Cada animación responde al scroll o a una acción. Con `prefers-reduced-motion` se detiene el giro continuo, la cinta y el seguimiento del puntero; lo que depende del scroll se mantiene porque lo controla la persona.
 
 ## Panel y app
 
-Mismos tokens. La app: serena y rápida, solo microinteracciones. El panel: denso, sobre papel y madrugada, con buganvilla solo para acciones y alertas.
+Mismos tokens y tipografías. La app: serena y rápida, con Illa en estados vacíos y de éxito. El panel: denso, sobre papel, con tomate solo para acciones y alertas. Ninguno usa fondos oscuros.

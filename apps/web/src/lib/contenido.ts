@@ -1,22 +1,14 @@
-import type { Modalidad, Recepcion } from "@casera/db";
-import type { TipoFruto } from "@casera/ui";
+import type { Modalidad, Recepcion } from "@illari/db";
 
 /** Textos de la página comercial. Aquí no van precios ni condiciones de pago. */
 
-export const MODALIDADES: {
-  id: Modalidad;
-  nombre: string;
-  resumen: string;
-  detalle: string;
-  frutos: TipoFruto[];
-}[] = [
+export const MODALIDADES: { id: Modalidad; nombre: string; resumen: string; detalle: string }[] = [
   {
     id: "paquete",
     nombre: "Paquetes y combos",
     resumen: "Una compra ya pensada, que ajustas a tu casa.",
     detalle:
       "Partes de una compra armada para una necesidad concreta y le cambias lo que quieras: más de esto, nada de aquello.",
-    frutos: ["tomate", "papa", "huevo"],
   },
   {
     id: "lista",
@@ -24,7 +16,6 @@ export const MODALIDADES: {
     resumen: "Tú dices qué, cuánto y cómo lo quieres.",
     detalle:
       "Nos mandas tu lista con cantidades y detalles: la palta para hoy, el tomate para ensalada, el pollo en presas. Compramos exactamente eso.",
-    frutos: ["palta", "limon", "zanahoria"],
   },
   {
     id: "delegada",
@@ -32,7 +23,6 @@ export const MODALIDADES: {
     resumen: "Nos dices para qué y cuánto quieres gastar. Nosotras elegimos.",
     detalle:
       "Nos cuentas qué necesitas, tu presupuesto y lo que prefieres en casa. Nuestra compradora decide qué llevar, como lo haría para la suya.",
-    frutos: ["choclo", "aji", "culantro"],
   },
   {
     id: "caseros",
@@ -40,7 +30,6 @@ export const MODALIDADES: {
     resumen: "Compramos en los puestos donde tú siempre compras.",
     detalle:
       "Si ya tienes tus vendedores de siempre, nos indicas cuáles y vamos a ellos. Tu compra sigue siendo la tuya, solo que no vas tú.",
-    frutos: ["cebolla", "tomate", "limon"],
   },
 ];
 
@@ -53,25 +42,24 @@ export const RECEPCIONES: { id: Recepcion; nombre: string; detalle: string }[] =
 export const PASOS: { momento: string; titulo: string; texto: string }[] = [
   {
     momento: "El día anterior",
-    titulo: "Nos cuentas qué necesitas",
+    titulo: "Nos cuentas qué necesitas.",
     texto:
       "Por aquí, por WhatsApp o por llamada. Eliges un paquete, mandas tu lista o nos dejas decidir. También nos dices qué hacer si algo no hay.",
   },
   {
     momento: "Antes de comprar",
-    titulo: "Te enviamos la cotización",
-    texto:
-      "Averiguamos los precios del día y te la mandamos para que la revises. No compramos nada hasta que la apruebes.",
+    titulo: "Te enviamos la cotización.",
+    texto: "Averiguamos los precios del día y te la mandamos para que la revises. No compramos nada hasta que la apruebes.",
   },
   {
     momento: "De madrugada",
-    titulo: "Compramos por ti",
+    titulo: "Compramos por ti.",
     texto:
       "Recorremos los puestos y elegimos pieza por pieza. Si un producto no está disponible, hacemos lo que nos indicaste: nunca decidimos por ti.",
   },
   {
     momento: "En la mañana",
-    titulo: "Recibes tu compra",
+    titulo: "Recibes tu compra.",
     texto: "Te la llevamos a casa, en cualquier punto de Tacna, o la recoges en el Mercado Grau.",
   },
 ];
@@ -91,12 +79,13 @@ export const CRITERIOS: { titulo: string; texto: string }[] = [
   },
 ];
 
-/** Lo que dice la casera según la parte de la página que se está viendo. */
+export const CINTA = ["Frutas", "Verduras", "Tubérculos", "Carnes", "Pollo", "Huevos", "Abarrotes", "Hierbas"];
+
+/** Lo que dice Illa, la compradora, según la parte de la página que se está viendo. */
 export const GUIA: Record<string, string> = {
-  inicio: "Hola. Yo voy al mercado para que tú no tengas que madrugar.",
-  como: "Así trabajamos: primero la cotización, después la compra.",
-  modos: "Elige la forma que más se parezca a cómo compras tú.",
-  criterio: "Compro como para mi casa. Si no me convence, no lo llevo.",
-  paquetes: "Estos paquetes se pueden cambiar a tu gusto.",
-  pedir: "Déjame tus datos y te escribo para coordinar.",
+  inicio: "Hola, soy Illa. Yo voy al mercado para que tú no tengas que madrugar.",
+  formas: "Elige la forma que más se parezca a cómo compras tú.",
+  pasos: "Así trabajamos: primero la cotización, después la compra.",
+  quien: "Compro como para mi casa. Si no me convence, no lo llevo.",
+  pedir: "Cuéntame qué necesitas y te escribo para coordinar.",
 };

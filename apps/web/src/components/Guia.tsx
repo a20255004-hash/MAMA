@@ -2,19 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Casera } from "@casera/ui";
+import { Lienzo } from "@/tres/Lienzo";
+import { Mascota } from "@/tres/Mascota";
 import { GUIA } from "@/lib/contenido";
 
-const CLAVE = "casera:guia-oculta";
+const CLAVE = "illari:guia-oculta";
 
 /**
- * La casera acompaña la lectura con una frase por sección.
- * Se puede cerrar y la decisión se recuerda en este dispositivo.
+ * Illa acompaña la lectura con una frase por sección y sigue al puntero con la mirada.
+ * Se puede recoger y la decisión se recuerda en este dispositivo.
  */
 export function Guia() {
   const [seccion, setSeccion] = useState("inicio");
   const [oculta, setOculta] = useState(true);
-  const quieto = useReducedMotion();
+  const quieto = useReducedMotion() ?? false;
 
   useEffect(() => {
     try {
@@ -24,7 +25,6 @@ export function Guia() {
     } catch {
       setOculta(false);
     }
-    const secciones = document.querySelectorAll<HTMLElement>("[data-guia]");
     const observador = new IntersectionObserver(
       (entradas) => {
         for (const e of entradas) {
@@ -33,7 +33,7 @@ export function Guia() {
       },
       { rootMargin: "-45% 0px -45% 0px" },
     );
-    secciones.forEach((s) => observador.observe(s));
+    document.querySelectorAll("[data-guia]").forEach((s) => observador.observe(s));
     return () => observador.disconnect();
   }, []);
 
@@ -46,10 +46,8 @@ export function Guia() {
     }
   }
 
-  const frase = GUIA[seccion] ?? GUIA.inicio;
-
   return (
-    <aside className="guia" aria-label="La casera te acompaña">
+    <aside className="guia" aria-label="Illa te acompaña">
       {!oculta && (
         <div className="guia__globo">
           <AnimatePresence mode="wait" initial={false}>
@@ -60,14 +58,9 @@ export function Guia() {
               exit={quieto ? undefined : { opacity: 0, y: -6 }}
               transition={{ duration: 0.2 }}
             >
-              {frase}
+              {GUIA[seccion] ?? GUIA.inicio}
             </motion.p>
           </AnimatePresence>
-          <button type="button" className="guia__cerrar" onClick={() => alternar(true)} aria-label="Ocultar a la casera">
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
-              <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </button>
         </div>
       )}
       <button
@@ -75,9 +68,13 @@ export function Guia() {
         className="guia__avatar"
         onClick={() => alternar(!oculta)}
         aria-expanded={!oculta}
-        aria-label={oculta ? "Mostrar a la casera" : "Ocultar a la casera"}
+        aria-label={oculta ? "Mostrar lo que dice Illa" : "Ocultar lo que dice Illa"}
       >
-        <Casera gesto="saluda" />
+        <Lienzo className="guia__lienzo" camara={[0, 0.1, 3.1]} fov={30}>
+          <group position={[0, -0.22, 0]}>
+            <Mascota quieto={quieto} saluda={!oculta} />
+          </group>
+        </Lienzo>
       </button>
     </aside>
   );

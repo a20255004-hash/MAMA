@@ -1,8 +1,10 @@
-# Casera — contexto del proyecto
+# Illari — contexto del proyecto
 
 Servicio de compras por encargo en el **Mercado Grau de Tacna**. El cliente delega su compra a una compradora de confianza que conoce el mercado y elige como para su propia casa. No es un delivery ni un supermercado en línea: es una compra personalizada basada en confianza, calidad y comodidad.
 
-"Casera" es el nombre de trabajo de la marca (propuesto por Claude, pendiente de confirmación de la dueña). Cambiarlo implica: `packages/ui/src/marca.ts`, textos de `apps/web` y el nombre de los paquetes npm `@casera/*`.
+"Illari" ("amanecer" en quechua) es el nombre de trabajo de la marca, propuesto por Claude y pendiente de confirmación de la dueña; la dueña rechazó "Casera". El personaje guía se llama Illa. Cambiar el nombre implica: `packages/ui/src/marca.ts`, los textos "illari" de `apps/web` y el nombre de los paquetes npm `@illari/*`.
+
+WhatsApp del negocio: 51 916 973 788 (está en `packages/ui/src/marca.ts`).
 
 ## Negocio
 
@@ -23,6 +25,8 @@ Servicio de compras por encargo en el **Mercado Grau de Tacna**. El cliente dele
 6. **El módulo de compras debe ser muy fácil de usar** para una persona no técnica, de pie en el mercado, con el celular.
 7. **Toda tabla operativa lleva `ciudad_id`** (y `mercado_id` cuando aplique). Roles previstos: cliente, compradora, repartidor, administrador.
 8. **El diseño premium va desde la primera pantalla.** No se construyen interfaces genéricas para "embellecer después".
+9. **Sin fondos oscuros.** La dueña lo pidió expresamente: todos los fondos son claros en la web, la app y el panel. El verde profundo es solo para texto.
+10. **Se publica en GitHub Pages, no en Vercel.** El sitio es estático: no hay código de servidor (ni server actions ni rutas API).
 
 ## Arquitectura
 
@@ -38,14 +42,15 @@ supabase/       Migraciones SQL y datos semilla
 docs/           Documentación solo cuando hace falta
 ```
 
-- **Stack:** TypeScript, Next.js 15, React 19, Motion (`motion/react`), Supabase (Postgres + RLS), CSS propio con tokens (sin Tailwind). Hosting previsto: Vercel.
-- **Datos:** las apps nunca hablan con Supabase directamente; pasan por `@casera/db`. Los cambios de esquema van como archivo nuevo en `supabase/migrations/`.
+- **Stack:** TypeScript, Next.js 15 con exportación estática, React 19, Motion (`motion/react`), Three.js con React Three Fiber, Supabase (Postgres + RLS), CSS propio con tokens (sin Tailwind).
+- **Publicación:** GitHub Pages mediante `.github/workflows/pages.yml`, en cada cambio de `main`. El sitio vive en `/PROYECTO-LUZMILA` (`NEXT_PUBLIC_BASE_PATH`).
+- **Datos:** las apps nunca hablan con Supabase directamente; pasan por `@illari/db`, que corre en el navegador con la clave publicable. Los cambios de esquema van como archivo nuevo en `supabase/migrations/`.
 - **Seguridad:** RLS activo en todas las tablas. En el navegador solo se usa la clave publicable. La clave `service_role` no entra al repositorio.
 - **Comandos:** `npm run dev` (web en :3000), `npm run build`, `npm run typecheck`.
 
 ## Diseño
 
-Dirección de arte completa en `docs/direccion-de-arte.md`. Resumen: concepto **"de la madrugada a tu mesa"**; la página recorre las horas de una compra (4:30 a. m. → 7:30 a. m.) y el cielo cambia con el scroll. Paleta: madrugada (índigo), buganvilla (magenta, color de marca), ají (amarillo), culantro (verde), alba (rosa pálido). Tipografía: Bricolage Grotesque (títulos, estrecha y pesada, como letrero de puesto) + Hanken Grotesk (texto). Personaje guía: la casera.
+Dirección de arte completa en `docs/direccion-de-arte.md`. Resumen: dirección **cinematográfica 3D** elegida por la dueña tras rechazar una primera versión de ilustraciones planas y secciones apiladas por genérica. La página son escenas fijas que avanzan con el scroll: apertura 3D en tres actos (racimo, vuelo, repisa al amanecer), carrusel horizontal, pasos con número gigante, personaje 3D. Paleta clara: papel, alba (rosa), durazno, menta, tomate (acción) y tinta (verde profundo, solo texto). Tipografía: Bodoni Moda (títulos) + Schibsted Grotesk (texto). El 3D está en `apps/web/src/tres` y usa solo geometría propia.
 
 Reglas de diseño de la dueña (globales): dirección de arte antes del código, nada de plantilla genérica, movimiento con función, responsive, accesible y `prefers-reduced-motion` respetado, verificar en navegador en escritorio y móvil, y decir qué skills se invocaron realmente.
 

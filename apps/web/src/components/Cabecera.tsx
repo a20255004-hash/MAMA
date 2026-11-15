@@ -1,36 +1,47 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
-import { MARCA } from "@casera/ui";
+import { useEffect, useState } from "react";
+import { MARCA } from "@illari/ui";
 
-/**
- * Cabecera flotante. El sol recorre su arco a medida que se baja por la página:
- * es el mismo viaje de la compra, de la madrugada a la mañana.
- */
+/** Cabecera fija. Toma el color (claro u oscuro) de la sección que tiene debajo. */
 export function Cabecera() {
-  const { scrollYProgress } = useScroll();
-  const offsetDistance = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const [tema, setTema] = useState("oscuro");
+
+  useEffect(() => {
+    let pendiente = 0;
+    const leer = () => {
+      pendiente = 0;
+      for (const s of document.querySelectorAll<HTMLElement>("[data-tema]:not(.cabecera)")) {
+        const r = s.getBoundingClientRect();
+        if (r.top <= 40 && r.bottom > 40) {
+          setTema(s.dataset.tema ?? "oscuro");
+          return;
+        }
+      }
+    };
+    const alMover = () => {
+      if (!pendiente) pendiente = requestAnimationFrame(leer);
+    };
+    leer();
+    window.addEventListener("scroll", alMover, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", alMover);
+      cancelAnimationFrame(pendiente);
+    };
+  }, []);
 
   return (
-    <header className="cabecera">
+    <header className="cabecera" data-tema={tema}>
       <a className="cabecera__marca" href="#inicio" aria-label={`${MARCA.nombre}, inicio`}>
-        casera
+        illari
       </a>
-      <svg className="cabecera__cielo" viewBox="0 0 64 28" aria-hidden="true" focusable="false">
-        <path d="M4 24 A28 22 0 0 1 60 24" fill="none" stroke="currentColor" strokeOpacity=".35" strokeDasharray="2 4" />
-        <motion.circle
-          r="4.5"
-          fill="var(--aji)"
-          style={{ offsetPath: 'path("M4 24 A28 22 0 0 1 60 24")', offsetDistance }}
-        />
-      </svg>
       <nav className="cabecera__nav" aria-label="Secciones">
-        <a href="#como">Cómo funciona</a>
-        <a href="#modos">Formas de comprar</a>
-        <a href="#criterio">Quién compra</a>
+        <a href="#formas">Formas de comprar</a>
+        <a href="#pasos">Cómo funciona</a>
+        <a href="#quien">Quién compra</a>
       </nav>
-      <a className="boton boton--aji cabecera__pedir" href="#pedir">
-        Pedir mi compra
+      <a className="cabecera__pedir" href="#pedir">
+        Pedir
       </a>
     </header>
   );

@@ -2,28 +2,33 @@
 
 ## Fases
 
-1. **Web comercial y cimientos** — construida. Falta conectar la base de datos (ver abajo).
+1. **Web comercial y cimientos** — construida (segunda versión, cinematográfica 3D). Falta conectar la base de datos.
 2. **Panel ERP** — pendiente. Bandeja de solicitudes, clientes, pedidos, cotización, compra, liquidación y caja.
 3. **App de clientes (PWA)** — pendiente. Registro, perfil de preferencias del hogar, pedidos y seguimiento.
 4. **Reportes, personal y varias ciudades** — pendiente.
 
 ## Fase 1: qué hay
 
-- Monorepo con `apps/web`, `packages/ui` (tokens, personaje, ilustraciones) y `packages/db` (datos y validación).
-- Página comercial completa: portada, amanecer, cómo funciona, formas de comprar, quién compra, paquetes (si hay publicados) y formulario de solicitud.
-- Migración `supabase/migrations/0001_cimientos.sql`: ciudades, mercados, paquetes y solicitudes, con seguridad por filas.
-- `supabase/seed.sql`: tres paquetes de propuesta, en borrador.
+- Monorepo con `apps/web`, `packages/ui` (tokens y marca) y `packages/db` (datos y validación).
+- Página comercial con escenas 3D, carrusel, pasos fijos, personaje y formulario.
+- El formulario valida y abre WhatsApp (51 916 973 788) con el pedido redactado. Si la base de datos está conectada, además guarda la solicitud.
+- Migración `supabase/migrations/0001_cimientos.sql` y `supabase/seed.sql` (tres paquetes de propuesta, en borrador).
+- Publicación automática en GitHub Pages con `.github/workflows/pages.yml` en cada cambio de `main`.
+
+## Publicación
+
+- El sitio es estático (`output: "export"`): GitHub Pages no ejecuta código de servidor. Por eso los datos se leen y escriben desde el navegador con la clave publicable y seguridad por filas.
+- GitHub Pages gratis exige que el repositorio sea **público**.
+- Las variables `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` se configuran en GitHub (Settings → Secrets and variables → Actions → Variables).
 
 ## Pendiente para cerrar la fase 1
 
+- [ ] Hacer público el repositorio (lo hace la dueña) para que GitHub Pages publique.
 - [ ] Crear el proyecto de Supabase y aplicar la migración (requiere autorización de la dueña).
-- [ ] Copiar `apps/web/.env.example` a `apps/web/.env.local` y completar URL y clave publicable.
-- [ ] Probar el envío real de una solicitud y verificarla en la base de datos.
-- [ ] Publicar en Vercel.
+- [ ] Probar el guardado real de una solicitud.
 
 ## Datos que debe entregar la dueña
 
-- Número de WhatsApp del negocio (activa los botones de WhatsApp).
-- Confirmación del nombre "Casera", o el nombre definitivo.
-- Paquetes reales: nombres y contenido (hoy hay tres propuestas en borrador).
-- Modelo de cobro del servicio (tarifa fija, porcentaje o mixta). Solo para el panel; no se publica.
+- Confirmación del nombre "Illari" o el definitivo.
+- Paquetes reales: nombres y contenido.
+- Modelo de cobro del servicio (solo para el panel; no se publica).

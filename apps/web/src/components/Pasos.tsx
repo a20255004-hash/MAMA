@@ -1,39 +1,76 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useSpring } from "motion/react";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import { PASOS } from "@/lib/contenido";
 
-/** Los cuatro momentos de una compra. La línea se llena con el avance de la lectura. */
+/**
+ * Los cuatro momentos de una compra. La pantalla queda fija y el número
+ * cambia con el scroll; debajo queda la lista completa para lectores de pantalla.
+ */
 export function Pasos() {
-  const ref = useRef<HTMLOListElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 60%"] });
-  const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 28 });
+  const pista = useRef<HTMLDivElement>(null);
+  const [activo, setActivo] = useState(0);
+  const quieto = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: pista, offset: ["start start", "end end"] });
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setActivo(Math.min(PASOS.length - 1, Math.floor(v * PASOS.length)));
+  });
+
+  const paso = PASOS[activo]!;
+  const entrar = quieto ? false : { opacity: 0, y: 40 };
+  const salir = quieto ? undefined : { opacity: 0, y: -40 };
 
   return (
-    <section id="como" className="seccion pasos" data-guia="como">
-      <div className="pasos__titulo">
-        <h2 className="titulo-2">Cuatro momentos, y solo uno es tuyo.</h2>
-        <p className="bajada">
-          Tú nos dices qué necesitas. De ahí en adelante, la madrugada, los puestos y las bolsas corren por
-          nuestra cuenta.
-        </p>
+    <section ref={pista} id="pasos" className="pasos" data-guia="pasos" data-tema="oscuro">
+      <div className="pasos__fija">
+        <h2 className="pasos__titulo">Cuatro momentos. Solo el primero es tuyo.</h2>
+
+        <div className="pasos__cuerpo" aria-hidden="true">
+          <div className="pasos__numero">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.span
+                key={activo}
+                initial={quieto ? false : { y: "60%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={quieto ? undefined : { y: "-60%", opacity: 0 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {activo + 1}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={activo}
+              className="pasos__texto"
+              initial={entrar}
+              animate={{ opacity: 1, y: 0 }}
+              exit={salir}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <p className="pasos__momento">{paso.momento}</p>
+              <p className="pasos__paso">{paso.titulo}</p>
+              <p className="pasos__detalle">{paso.texto}</p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <ol className="pasos__marcas" aria-hidden="true">
+          {PASOS.map((p, i) => (
+            <li key={p.titulo} data-activo={i <= activo || undefined} />
+          ))}
+        </ol>
+
+        <ol className="solo-lectores">
+          {PASOS.map((p) => (
+            <li key={p.titulo}>
+              {p.momento}: {p.titulo} {p.texto}
+            </li>
+          ))}
+        </ol>
       </div>
-      <ol ref={ref} className="pasos__lista">
-        <motion.span className="pasos__linea" style={{ scaleY }} aria-hidden="true" />
-        {PASOS.map((paso, i) => (
-          <li key={paso.titulo} className="paso">
-            <span className="paso__numero" aria-hidden="true">
-              {i + 1}
-            </span>
-            <div>
-              <p className="paso__momento">{paso.momento}</p>
-              <h3 className="titulo-3">{paso.titulo}</h3>
-              <p>{paso.texto}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
     </section>
   );
 }

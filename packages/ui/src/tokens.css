@@ -1,29 +1,30 @@
-/* Casera — tokens de diseño compartidos por la web, la app y el panel. */
+/* Illari — tokens de diseño compartidos por la web, la app y el panel. */
 :root {
-  /* Color: las horas de una compra en el mercado */
-  --madrugada: #1b1640; /* cielo de las 4:30, texto principal */
-  --madrugada-2: #2c2168; /* cielo que empieza a aclarar */
-  --buganvilla: #d4186c; /* color de marca: la flor de Tacna */
-  --buganvilla-osc: #a80f54;
-  --aji: #f5b700; /* ají amarillo: acento y sol */
-  --culantro: #1f7a4d; /* confirmaciones y frescura */
-  --alba: #ffe9e4; /* cielo rosa del amanecer */
-  --papel: #fffaf6; /* luz de día, fondo de lectura */
-  --tinta-suave: #5b557a; /* texto secundario sobre claro */
-  --niebla: #cfc8f2; /* texto secundario sobre madrugada */
-  --linea: rgb(27 22 64 / 0.14);
+  /* Color: la primera luz del día. Todos los fondos son claros. */
+  --papel: #fffcf7; /* blanco cálido: fondo de lectura */
+  --alba: #ffe9dc; /* rosa del amanecer: apertura */
+  --durazno-claro: #ffe3c8; /* superficie cálida */
+  --menta: #ddefe6; /* superficie fresca */
+  --menta-viva: #a9dfc6; /* tarjeta fresca */
+  --limon: #f2e277; /* tarjeta luminosa */
+  --durazno: #ffb56b; /* la primera luz: acento y amanecer */
+  --tomate: #e5391f; /* acción principal */
+  --tomate-osc: #b92a14;
+  --tinta: #0b2b24; /* verde profundo: solo para texto */
+  --musgo: #47625a; /* texto secundario */
+  --linea-oscura: rgb(11 43 36 / 0.18);
 
   /* Tipografía (cada app carga las familias y define estas dos variables) */
-  --f-titulo: var(--font-titulo), "Arial Narrow", sans-serif;
+  --f-titulo: var(--font-titulo), "Bodoni MT", Didot, serif;
   --f-texto: var(--font-texto), system-ui, sans-serif;
 
   --t-xs: 0.8125rem;
   --t-sm: 0.9375rem;
   --t-base: 1.0625rem;
-  --t-lg: 1.3125rem;
-  --t-xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
-  --t-2xl: clamp(2.4rem, 1.4rem + 4.4vw, 4.75rem);
-  --t-3xl: clamp(3.1rem, 1rem + 9.6vw, 9.5rem);
+  --t-lg: 1.25rem;
+  --t-xl: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  --t-2xl: clamp(2.5rem, 1.2rem + 5.2vw, 5.5rem);
+  --t-3xl: clamp(3.2rem, 0.6rem + 11vw, 11.5rem);
 
   /* Espacio */
   --e-1: 0.25rem;
@@ -37,15 +38,14 @@
   --e-9: 7rem;
   --e-10: 10rem;
 
-  --margen: clamp(1.25rem, 5vw, 4.5rem);
-  --ancho: 78rem;
+  --margen: clamp(1.25rem, 4.5vw, 4rem);
+  --ancho: 84rem;
 
-  /* Forma: el radio comunica jerarquía; no se usa uno solo para todo */
-  --r-chico: 0.5rem;
-  --r-medio: 1.25rem;
-  --r-grande: 2.5rem;
+  --r-chico: 0.375rem;
+  --r-medio: 1rem;
+  --r-grande: 2rem;
   --r-pastilla: 999px;
 
   --suave: cubic-bezier(0.22, 1, 0.36, 1);
-  --foco: 3px solid var(--aji);
+  --foco: 2px solid var(--durazno);
 }
