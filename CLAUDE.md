@@ -43,7 +43,7 @@ docs/           Documentación solo cuando hace falta
 ```
 
 - **Stack:** TypeScript, Next.js 15 con exportación estática, React 19, Motion (`motion/react`), Three.js con React Three Fiber, Supabase (Postgres + RLS), CSS propio con tokens (sin Tailwind).
-- **Publicación:** GitHub Pages mediante `.github/workflows/pages.yml`, en cada cambio de `main`. El sitio vive en `/PROYECTO-LUZMILA` (`NEXT_PUBLIC_BASE_PATH`).
+- **Publicación:** GitHub Pages mediante `.github/workflows/pages.yml`, en cada cambio de `main`. El repositorio en GitHub se llama `MAMA` (antes `PROYECTO-LUZMILA`); el sitio vive en `/MAMA` y la ruta base se toma sola del nombre del repositorio (`NEXT_PUBLIC_BASE_PATH`). Dirección pública: https://a20255004-hash.github.io/MAMA/
 - **Datos:** las apps nunca hablan con Supabase directamente; pasan por `@illari/db`, que corre en el navegador con la clave publicable. Los cambios de esquema van como archivo nuevo en `supabase/migrations/`.
 - **Seguridad:** RLS activo en todas las tablas. En el navegador solo se usa la clave publicable. La clave `service_role` no entra al repositorio.
 - **Comandos:** `npm run dev` (web en :3000), `npm run build`, `npm run typecheck`.

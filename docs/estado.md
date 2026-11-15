@@ -23,7 +23,8 @@
 
 ## Pendiente para cerrar la fase 1
 
-- [ ] Hacer público el repositorio (lo hace la dueña) para que GitHub Pages publique.
+- [x] Repositorio público (renombrado a `MAMA`).
+- [ ] Activar GitHub Pages una vez: Settings → Pages → Source: "GitHub Actions" (lo hace la dueña). Luego la web queda en https://a20255004-hash.github.io/MAMA/
 - [ ] Crear el proyecto de Supabase y aplicar la migración (requiere autorización de la dueña).
 - [ ] Probar el guardado real de una solicitud.
 

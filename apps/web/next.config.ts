@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-// En GitHub Pages el sitio vive en /PROYECTO-LUZMILA; en local, en la raíz.
+// En GitHub Pages el sitio vive en /<nombre-del-repositorio>; en local, en la raíz.
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const config: NextConfig = {
