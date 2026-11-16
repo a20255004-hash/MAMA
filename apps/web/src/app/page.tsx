@@ -1,5 +1,6 @@
-import { MARCA, enlaceWhatsApp } from "@illari/ui";
+import { Logo, MARCA, enlaceWhatsApp } from "@illari/ui";
 import { Cabecera } from "@/components/Cabecera";
+import { Estilos } from "@/components/Estilos";
 import { Formas } from "@/components/Formas";
 import { Guia } from "@/components/Guia";
 import { Historia } from "@/components/Historia";
@@ -15,12 +16,12 @@ export default function Pagina() {
       <main id="contenido">
         <Historia />
 
-        <section className="manifiesto" data-tema="claro">
-          <p className="manifiesto__frase">Ir al mercado te cuesta una madrugada. Encargarlo, un mensaje.</p>
-          <p className="manifiesto__texto">
-            Levantarte antes que el sol, recorrer puestos, comparar, elegir y volver cargando. Si trabajas, estudias
-            o tienes hijos, esas horas tienen mejor uso. Nosotras hacemos el recorrido completo en el {MARCA.mercado}{" "}
-            de {MARCA.ciudad}.
+        <section className="manifiesto">
+          <h2 className="titulo-2">Sabemos lo que es correr todo el día.</h2>
+          <p className="bajada">
+            Levantarte de madrugada, caminar entre puestos, comparar, regatear y volver cargando las bolsas. Y recién
+            ahí empieza tu día. Si trabajas, estudias o tienes hijos, esas horas valen oro. Déjanos esa parte a
+            nosotras.
           </p>
         </section>
 
@@ -30,14 +31,12 @@ export default function Pagina() {
         <Pedir />
       </main>
 
-      <footer className="pie" data-tema="oscuro">
-        <p className="pie__marca" aria-hidden="true">
-          illari
+      <footer className="pie">
+        <Logo className="pie__logo" />
+        <p className="pie__frase">
+          {MARCA.nombre} significa amanecer en quechua. Así queremos que empiece tu día: con tu mercado ya hecho.
         </p>
         <div className="pie__fila">
-          <p>
-            {MARCA.nombre} significa amanecer en quechua. {MARCA.lema}
-          </p>
           <p>
             {MARCA.mercado}, {MARCA.ciudad}, Perú
           </p>
@@ -48,6 +47,7 @@ export default function Pagina() {
       </footer>
 
       <Guia />
+      <Estilos />
     </>
   );
 }

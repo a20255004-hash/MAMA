@@ -1,30 +1,95 @@
-/* Illari — tokens de diseño compartidos por la web, la app y el panel. */
+/*
+ * Illari — tokens de diseño compartidos por la web, la app y el panel.
+ * Reglas: todos los fondos son claros; un solo color de acción por estilo;
+ * tres pesos de letra como máximo (400, 500, 600).
+ *
+ * Hay tres estilos en evaluación. La dueña elige uno y los otros dos se borran.
+ */
+:root,
+:root[data-estilo="huerta"] {
+  /* Huerta: verde de hoja y mandarina sobre blanco cálido. */
+  --fondo: #fbfaf4; /* lienzo: la mayor parte de la página */
+  --apertura: #f1f5e2; /* primera luz de la portada */
+  --amanecer: #ffe08a; /* la portada cuando sale el sol */
+  --calida: #fff3cf; /* superficie cálida */
+  --fresca: #e7f1de; /* superficie fresca */
+  --tarjeta-a: #dcebcf;
+  --tarjeta-c: #ffe08a;
+  --tarjeta-d: #f7e6d3;
+  --accion: #d9480f; /* único color de acción */
+  --accion-osc: #b23a0a;
+  --accion-texto: #ffffff;
+  --tinta: #14352a; /* texto */
+  --tinta-suave: #4b6358; /* texto secundario */
+  --linea: rgb(20 53 42 / 0.16);
+
+  --f-titulo: var(--font-fraunces), Georgia, serif;
+  --f-texto: var(--font-jakarta), system-ui, sans-serif;
+  --peso-titulo: 500;
+  --cursiva: italic;
+  --apretado: -0.02em;
+}
+
+:root[data-estilo="sol"] {
+  /* Sol de Tacna: amarillo de sol y azul cobalto. */
+  --fondo: #fffdf6;
+  --apertura: #fff5cf;
+  --amanecer: #ffd24a;
+  --calida: #fff0c2;
+  --fresca: #e9f0ff;
+  --tarjeta-a: #dce7ff;
+  --tarjeta-c: #ffd24a;
+  --tarjeta-d: #ffe7dc;
+  --accion: #2447d6;
+  --accion-osc: #1b37a8;
+  --accion-texto: #ffffff;
+  --tinta: #101b3f;
+  --tinta-suave: #4a557a;
+  --linea: rgb(16 27 63 / 0.16);
+
+  --f-titulo: var(--font-outfit), system-ui, sans-serif;
+  --f-texto: var(--font-dm), system-ui, sans-serif;
+  --peso-titulo: 600;
+  --cursiva: normal;
+  --apretado: -0.03em;
+}
+
+:root[data-estilo="rocoto"] {
+  /* Rocoto: rojo de rocoto y oliva sobre crema. */
+  --fondo: #fffbf5;
+  --apertura: #fdefe3;
+  --amanecer: #f9c77e;
+  --calida: #fcebd5;
+  --fresca: #eef0dc;
+  --tarjeta-a: #e3e8c8;
+  --tarjeta-c: #f9c77e;
+  --tarjeta-d: #f6ddd3;
+  --accion: #c81e2b;
+  --accion-osc: #9f1622;
+  --accion-texto: #ffffff;
+  --tinta: #2a1a14;
+  --tinta-suave: #6b564c;
+  --linea: rgb(42 26 20 / 0.16);
+
+  --f-titulo: var(--font-young), Georgia, serif;
+  --f-texto: var(--font-figtree), system-ui, sans-serif;
+  --peso-titulo: 400;
+  --cursiva: normal;
+  --apretado: -0.015em;
+}
+
 :root {
-  /* Color: la primera luz del día. Todos los fondos son claros. */
-  --papel: #fffcf7; /* blanco cálido: fondo de lectura */
-  --alba: #ffe9dc; /* rosa del amanecer: apertura */
-  --durazno-claro: #ffe3c8; /* superficie cálida */
-  --menta: #ddefe6; /* superficie fresca */
-  --menta-viva: #a9dfc6; /* tarjeta fresca */
-  --limon: #f2e277; /* tarjeta luminosa */
-  --durazno: #ffb56b; /* la primera luz: acento y amanecer */
-  --tomate: #e5391f; /* acción principal */
-  --tomate-osc: #b92a14;
-  --tinta: #0b2b24; /* verde profundo: solo para texto */
-  --musgo: #47625a; /* texto secundario */
-  --linea-oscura: rgb(11 43 36 / 0.18);
+  /* Tamaños: cuerpo 1rem, secundario 0.875rem, meta 0.75rem. Nada por debajo. */
+  --t-meta: 0.75rem;
+  --t-sec: 0.875rem;
+  --t-base: 1rem;
+  --t-lg: 1.1875rem;
+  --t-xl: clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
+  --t-2xl: clamp(1.875rem, 1.2rem + 2.8vw, 3.5rem);
+  --t-3xl: clamp(2.25rem, 1.1rem + 4.6vw, 5.25rem);
 
-  /* Tipografía (cada app carga las familias y define estas dos variables) */
-  --f-titulo: var(--font-titulo), "Bodoni MT", Didot, serif;
-  --f-texto: var(--font-texto), system-ui, sans-serif;
-
-  --t-xs: 0.8125rem;
-  --t-sm: 0.9375rem;
-  --t-base: 1.0625rem;
-  --t-lg: 1.25rem;
-  --t-xl: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
-  --t-2xl: clamp(2.5rem, 1.2rem + 5.2vw, 5.5rem);
-  --t-3xl: clamp(3.2rem, 0.6rem + 11vw, 11.5rem);
+  --alto-titulo: 1.1;
+  --alto-texto: 1.55;
 
   /* Espacio */
   --e-1: 0.25rem;
@@ -36,16 +101,22 @@
   --e-7: 3rem;
   --e-8: 4.5rem;
   --e-9: 7rem;
-  --e-10: 10rem;
 
   --margen: clamp(1.25rem, 4.5vw, 4rem);
-  --ancho: 84rem;
+  --ancho: 80rem;
 
-  --r-chico: 0.375rem;
+  --r-chico: 0.5rem;
   --r-medio: 1rem;
-  --r-grande: 2rem;
+  --r-grande: 1.75rem;
   --r-pastilla: 999px;
 
-  --suave: cubic-bezier(0.22, 1, 0.36, 1);
-  --foco: 2px solid var(--durazno);
+  /* Movimiento: solo estas duraciones; entra con salida suave, sale con entrada suave. */
+  --m-150: 150ms;
+  --m-200: 200ms;
+  --m-300: 300ms;
+  --entra: cubic-bezier(0.16, 1, 0.3, 1);
+  --sale: cubic-bezier(0.7, 0, 0.84, 0);
+
+  --sombra: 0 1px 3px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.05);
+  --foco: 2px solid var(--accion);
 }

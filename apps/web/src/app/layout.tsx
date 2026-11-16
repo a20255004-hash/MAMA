@@ -1,28 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Schibsted_Grotesk } from "next/font/google";
+import { DM_Sans, Figtree, Fraunces, Outfit, Plus_Jakarta_Sans, Young_Serif } from "next/font/google";
 import { MARCA } from "@illari/ui";
 import "@illari/ui/tokens.css";
 import "./globals.css";
 
-const titulo = Bodoni_Moda({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-titulo",
-  display: "swap",
-});
+// Estilo "Huerta" (propuesto). Los otros dos pares son temporales, mientras la dueña elige.
+const fraunces = Fraunces({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-fraunces", display: "swap" });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit", display: "swap" });
+const dm = DM_Sans({ subsets: ["latin"], variable: "--font-dm", display: "swap" });
+const young = Young_Serif({ subsets: ["latin"], weight: "400", variable: "--font-young", display: "swap" });
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
 
-const texto = Schibsted_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-texto",
-  display: "swap",
-});
+const fuentes = [fraunces, jakarta, outfit, dm, young, figtree].map((f) => f.variable).join(" ");
 
 export const metadata: Metadata = {
-  title: `${MARCA.nombre} — compras del ${MARCA.mercado} por encargo en ${MARCA.ciudad}`,
+  title: `${MARCA.nombre} — tu mercado del ${MARCA.mercado}, hecho por nosotras`,
   description:
-    "Mientras duermes, hacemos tu mercado. Una compradora que conoce el Mercado Grau elige tus frutas, verduras, carnes y abarrotes, y te los lleva a casa.",
+    "Duerme un ratito más: vamos al Mercado Grau por ti. Escogemos tu fruta, tu verdura y tu pollo como para nuestra mesa y te los llevamos a casa, en Tacna.",
   openGraph: {
-    title: `${MARCA.nombre} — mientras duermes, hacemos tu mercado`,
+    title: `${MARCA.nombre} — hoy vamos al mercado por ti`,
     description: MARCA.lema,
     locale: "es_PE",
     type: "website",
@@ -30,14 +27,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffe9dc",
+  themeColor: "#fbfaf4",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-PE" className={`${titulo.variable} ${texto.variable}`}>
+    <html lang="es-PE" className={fuentes} data-estilo="huerta" suppressHydrationWarning>
       <body>
         <a className="saltar" href="#contenido">
           Ir al contenido

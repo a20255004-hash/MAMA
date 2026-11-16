@@ -2,7 +2,7 @@
 
 Servicio de compras por encargo en el **Mercado Grau de Tacna**. El cliente delega su compra a una compradora de confianza que conoce el mercado y elige como para su propia casa. No es un delivery ni un supermercado en línea: es una compra personalizada basada en confianza, calidad y comodidad.
 
-"Illari" ("amanecer" en quechua) es el nombre de trabajo de la marca, propuesto por Claude y pendiente de confirmación de la dueña; la dueña rechazó "Casera". El personaje guía se llama Illa. Cambiar el nombre implica: `packages/ui/src/marca.ts`, los textos "illari" de `apps/web` y el nombre de los paquetes npm `@illari/*`.
+"Illari" ("amanecer" en quechua) es el nombre de la marca, **aprobado por la dueña**. El personaje guía se llama Illa. Antes de registrar la marca hay que consultarla en INDECOPI (hay otras empresas llamadas Illari en rubros distintos).
 
 WhatsApp del negocio: 51 916 973 788 (está en `packages/ui/src/marca.ts`).
 
@@ -50,7 +50,16 @@ docs/           Documentación solo cuando hace falta
 
 ## Diseño
 
-Dirección de arte completa en `docs/direccion-de-arte.md`. Resumen: dirección **cinematográfica 3D** elegida por la dueña tras rechazar una primera versión de ilustraciones planas y secciones apiladas por genérica. La página son escenas fijas que avanzan con el scroll: apertura 3D en tres actos (racimo, vuelo, repisa al amanecer), carrusel horizontal, pasos con número gigante, personaje 3D. Paleta clara: papel, alba (rosa), durazno, menta, tomate (acción) y tinta (verde profundo, solo texto). Tipografía: Bodoni Moda (títulos) + Schibsted Grotesk (texto). El 3D está en `apps/web/src/tres` y usa solo geometría propia.
+Dirección de arte completa en `docs/direccion-de-arte.md`; leerla antes de tocar la interfaz. Resumen:
+
+- La página son escenas fijas que avanzan con el scroll: apertura 3D en tres actos, carrusel horizontal, pasos con número grande. **Estos efectos le gustan a la dueña: no quitarlos.**
+- **Illa es una ilustración 2D** (`packages/ui/src/Illa.tsx`), no 3D. Debe verse entera y guiar al cliente (frases por sección y ayuda para elegir la forma de compra).
+- **Ningún texto puede salirse ni encimarse** con otro elemento. Verificarlo en 360, 375, 768, 1280 y 1440 px antes de entregar.
+- **Tono cálido y humano**, de tú a tú, como una casera de confianza. Nada que suene a robot.
+- Hay **tres estilos de color y letra en evaluación** (Huerta, Sol, Rocoto) en `packages/ui/src/tokens.css`, con un selector temporal (`apps/web/src/components/Estilos.tsx`). Cuando la dueña elija, borrar los otros dos, el selector y las fuentes sobrantes de `layout.tsx`.
+- Rechazados: fondos oscuros, ilustraciones planas de plantilla, secciones apiladas, índigo/magenta, rosa/menta, Bricolage Grotesque y Bodoni Moda.
+- Logo: sol que amanece con rayos de hojas (`packages/ui/src/Logo.tsx`).
+- El 3D está en `apps/web/src/tres` y usa solo geometría propia.
 
 Reglas de diseño de la dueña (globales): dirección de arte antes del código, nada de plantilla genérica, movimiento con función, responsive, accesible y `prefers-reduced-motion` respetado, verificar en navegador en escritorio y móvil, y decir qué skills se invocaron realmente.
 

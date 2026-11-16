@@ -24,16 +24,16 @@ export const solicitudSchema = z.object({
   nombre: z
     .string()
     .trim()
-    .min(2, "Escribe tu nombre.")
-    .max(80, "El nombre es demasiado largo."),
+    .min(2, "Dinos cómo te llamas.")
+    .max(80, "Ese nombre es muy largo; ponlo más cortito."),
   celular: z
     .string()
     .transform((v) => v.replace(/\D/g, "").replace(/^51(?=9\d{8}$)/, ""))
-    .pipe(z.string().regex(/^9\d{8}$/, "Escribe un celular de 9 dígitos que empiece en 9.")),
-  modalidad: z.enum(MODALIDADES, { message: "Elige cómo quieres comprar." }),
-  recepcion: z.enum(RECEPCIONES, { message: "Elige cómo quieres recibir tu compra." }),
+    .pipe(z.string().regex(/^9\d{8}$/, "Revisa tu celular: son 9 dígitos y empieza con 9.")),
+  modalidad: z.enum(MODALIDADES, { message: "Cuéntanos cómo quieres comprar." }),
+  recepcion: z.enum(RECEPCIONES, { message: "Dinos dónde te lo entregamos." }),
   paqueteId: z.string().uuid().nullable().optional(),
-  mensaje: z.string().trim().max(1200, "El mensaje es demasiado largo.").default(""),
+  mensaje: z.string().trim().max(1200, "Tu mensaje es muy largo; el resto nos lo cuentas por WhatsApp.").default(""),
 });
 export type SolicitudNueva = z.infer<typeof solicitudSchema>;
 

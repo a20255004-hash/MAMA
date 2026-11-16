@@ -8,7 +8,7 @@ import {
   type Modalidad,
   type Paquete,
 } from "@illari/db";
-import { MARCA, enlaceWhatsApp } from "@illari/ui";
+import { Illa, MARCA, enlaceWhatsApp } from "@illari/ui";
 import { MODALIDADES, RECEPCIONES } from "@/lib/contenido";
 import { EVENTO_MODALIDAD } from "./Formas";
 
@@ -67,7 +67,7 @@ export function Pedir() {
     const lineas = [
       `Hola, soy ${d.nombre}. Quiero pedir una compra del ${MARCA.mercado}.`,
       `Forma de compra: ${forma}${paquete ? ` (${paquete})` : ""}`,
-      `Recepción: ${recibe}`,
+      `Entrega: ${recibe}`,
       d.mensaje && `Lo que necesito: ${d.mensaje}`,
     ].filter(Boolean);
     const enlace = enlaceWhatsApp(lineas.join("\n"));
@@ -81,32 +81,35 @@ export function Pedir() {
   }
 
   return (
-    <section id="pedir" className="pedir" data-guia="pedir" data-tema="claro">
+    <section id="pedir" className="pedir" data-guia="pedir">
       <div className="pedir__intro">
-        <h2 className="pedir__titulo">Cuéntanos qué necesitas.</h2>
-        <p>
-          Llena tus datos y se abrirá WhatsApp con tu pedido ya escrito. Coordinamos contigo y te enviamos la
-          cotización. Pedir no te compromete a nada.
+        <h2 className="titulo-2">¿Qué te traemos?</h2>
+        <p className="bajada">
+          Déjanos tus datos y se abrirá WhatsApp con tu pedido ya escrito. Conversamos, te pasamos los precios y
+          recién ahí decides. Sin compromiso.
         </p>
       </div>
 
       {estado.fase === "enviada" ? (
         <div className="pedir__listo" role="status">
-          <h3>Tu pedido está listo para enviarse, {estado.nombre}.</h3>
-          <p>Se abrió WhatsApp con el mensaje escrito: solo falta que lo envíes. Si no se abrió, ábrelo desde aquí.</p>
-          <div className="pedir__acciones">
-            <a className="boton boton--tomate" href={estado.enlace} target="_blank" rel="noopener noreferrer">
-              Abrir WhatsApp
-            </a>
-            <button className="boton boton--borde-oscuro" type="button" onClick={() => setEstado({ fase: "inicial" })}>
-              Hacer otro pedido
-            </button>
+          <Illa gesto="celebra" className="pedir__illa" />
+          <div>
+            <h3>¡Listo, {estado.nombre}! Ya casi.</h3>
+            <p>Se abrió WhatsApp con tu pedido escrito. Dale a enviar y conversamos. Si no se abrió, ábrelo aquí.</p>
+            <div className="pedir__acciones">
+              <a className="boton boton--accion" href={estado.enlace} target="_blank" rel="noopener noreferrer">
+                Abrir WhatsApp
+              </a>
+              <button className="boton boton--borde" type="button" onClick={() => setEstado({ fase: "inicial" })}>
+                Hacer otro pedido
+              </button>
+            </div>
           </div>
         </div>
       ) : (
         <form className="formulario" onSubmit={enviar} noValidate>
           <div className="campo">
-            <label htmlFor="nombre">Tu nombre</label>
+            <label htmlFor="nombre">¿Cómo te llamas?</label>
             <input
               id="nombre"
               name="nombre"
@@ -160,9 +163,9 @@ export function Pedir() {
 
           {modalidad === "paquete" && paquetes.length > 0 && (
             <div className="campo campo--ancho">
-              <label htmlFor="paqueteId">Paquete</label>
+              <label htmlFor="paqueteId">¿Qué paquete te provoca?</label>
               <select id="paqueteId" name="paqueteId" defaultValue="">
-                <option value="">Aún no lo decido</option>
+                <option value="">Todavía no lo decido</option>
                 {paquetes.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.nombre}
@@ -173,7 +176,7 @@ export function Pedir() {
           )}
 
           <fieldset className="campo campo--ancho">
-            <legend>¿Cómo quieres recibirla?</legend>
+            <legend>¿Dónde te lo entregamos?</legend>
             <div className="opciones">
               {RECEPCIONES.map((r, i) => (
                 <label key={r.id} className="opcion opcion--doble">
@@ -189,14 +192,14 @@ export function Pedir() {
 
           <div className="campo campo--ancho">
             <label htmlFor="mensaje">
-              ¿Qué necesitas? <span className="campo__opcional">Opcional</span>
+              Cuéntanos qué necesitas <span className="campo__opcional">(si quieres)</span>
             </label>
             <textarea
               id="mensaje"
               name="mensaje"
               rows={4}
               maxLength={1200}
-              placeholder="Tu lista, para cuántas personas es, tus caseros, lo que prefieras."
+              placeholder="Tu lista, para cuántos cocinas, tus caseros… lo que se te ocurra."
               aria-invalid={errores.mensaje ? true : undefined}
             />
             {errores.mensaje && <p className="campo__error">{errores.mensaje}</p>}
@@ -207,7 +210,7 @@ export function Pedir() {
             <input id="sitio" name="sitio" tabIndex={-1} autoComplete="off" />
           </div>
 
-          <button className="boton boton--tomate boton--grande campo--ancho" type="submit">
+          <button className="boton boton--accion boton--grande campo--ancho" type="submit">
             Enviar mi pedido por WhatsApp
           </button>
         </form>
