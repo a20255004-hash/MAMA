@@ -7,8 +7,8 @@ import * as THREE from "three";
 import { Fruto, type Tipo } from "./Frutos";
 
 const PIEZAS: Tipo[] = [
-  "tomate", "palta", "naranja", "berenjena", "limon", "manzana", "huevo", "zanahoria",
-  "cebolla", "aji", "papa", "tomate", "limon", "huevo", "naranja", "manzana",
+  "palta", "manzana", "limon", "granada", "cebolla", "kiwi", "camote", "lima",
+  "manzana", "palta", "granada", "limon", "cebolla", "manzana", "camote", "lima",
 ];
 const N = PIEZAS.length;
 

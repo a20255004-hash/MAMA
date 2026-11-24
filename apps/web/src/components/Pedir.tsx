@@ -10,6 +10,7 @@ import {
 } from "@illari/db";
 import { Illa, MARCA, enlaceWhatsApp } from "@illari/ui";
 import { MODALIDADES, RECEPCIONES } from "@/lib/contenido";
+import { reproducir } from "@/lib/sonido";
 import { EVENTO_MODALIDAD } from "./Formas";
 
 type Estado =
@@ -77,6 +78,7 @@ export function Pedir() {
       if (!r.ok && r.motivo === "error") console.error("[solicitud]", r.detalle);
     });
     window.open(enlace, "_blank", "noopener");
+    reproducir("exito");
     setEstado({ fase: "enviada", nombre: d.nombre.split(" ")[0] ?? d.nombre, enlace });
   }
 

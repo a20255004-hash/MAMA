@@ -11,7 +11,7 @@
 
 - Monorepo con `apps/web`, `packages/ui` (tokens y marca) y `packages/db` (datos y validación).
 - Página comercial con escenas 3D, carrusel, pasos fijos, Illa (ilustrada) como guía, logo y formulario.
-- Tres estilos de color y letra en evaluación, con selector temporal en la página.
+- Estilo Huerta (elegido), frutas reales escaneadas en la portada y sonidos con botón para silenciar.
 - El formulario valida y abre WhatsApp (51 916 973 788) con el pedido redactado. Si la base de datos está conectada, además guarda la solicitud.
 - Migración `supabase/migrations/0001_cimientos.sql` y `supabase/seed.sql` (tres paquetes de propuesta, en borrador).
 - Publicación automática en GitHub Pages con `.github/workflows/pages.yml` en cada cambio de `main`.
@@ -31,7 +31,6 @@
 
 ## Datos que debe entregar la dueña
 
-- Elegir uno de los tres estilos de color y letra (Huerta, Sol o Rocoto).
 - Consultar "Illari" en el buscador de marcas de INDECOPI antes de registrarla.
 - Paquetes reales: nombres y contenido.
 - Modelo de cobro del servicio (solo para el panel; no se publica).

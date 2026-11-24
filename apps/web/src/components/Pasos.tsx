@@ -1,27 +1,30 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
+import { useMotionValueEvent, useScroll } from "motion/react";
 import { PASOS } from "@/lib/contenido";
-
-const ENTRA = [0.16, 1, 0.3, 1] as const;
-const SALE = [0.7, 0, 0.84, 0] as const;
+import { reproducir } from "@/lib/sonido";
 
 /**
- * Los cuatro momentos de una compra. La pantalla queda fija y el número
- * cambia con el scroll; la lista completa queda disponible para lectores de pantalla.
+ * Los cuatro momentos de una compra. La pantalla queda fija y el número cambia con
+ * el scroll. Los cuatro pasos están apilados en el mismo lugar y se cruzan con una
+ * transición CSS, así que el paso visible siempre coincide con el scroll.
+ * La lista completa queda disponible para lectores de pantalla.
  */
 export function Pasos() {
   const pista = useRef<HTMLDivElement>(null);
   const [activo, setActivo] = useState(0);
-  const quieto = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: pista, offset: ["start start", "end end"] });
 
+  const ultimo = useRef(0);
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setActivo(Math.min(PASOS.length - 1, Math.max(0, Math.floor(v * PASOS.length))));
+    const nuevo = Math.min(PASOS.length - 1, Math.max(0, Math.floor(v * PASOS.length)));
+    if (nuevo !== ultimo.current) {
+      ultimo.current = nuevo;
+      reproducir("paso", nuevo);
+    }
+    setActivo(nuevo);
   });
-
-  const paso = PASOS[activo]!;
 
   return (
     <section ref={pista} id="pasos" className="pasos" data-guia="pasos">
@@ -29,30 +32,16 @@ export function Pasos() {
         <h2 className="titulo-2">Así de fácil es.</h2>
 
         <div className="pasos__cuerpo" aria-hidden="true">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={`n${activo}`}
-              className="pasos__numero"
-              initial={quieto ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.2, ease: ENTRA } }}
-              exit={quieto ? undefined : { opacity: 0, y: -8, transition: { duration: 0.15, ease: SALE } }}
-            >
-              {activo + 1}
-            </motion.span>
-          </AnimatePresence>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={`t${activo}`}
-              className="pasos__texto"
-              initial={quieto ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.2, ease: ENTRA } }}
-              exit={quieto ? undefined : { opacity: 0, y: -8, transition: { duration: 0.15, ease: SALE } }}
-            >
-              <p className="pasos__momento">{paso.momento}</p>
-              <p className="pasos__paso">{paso.titulo}</p>
-              <p className="pasos__detalle">{paso.texto}</p>
-            </motion.div>
-          </AnimatePresence>
+          {PASOS.map((p, i) => (
+            <div key={p.titulo} className="paso" data-estado={i === activo ? "activo" : i < activo ? "antes" : "despues"}>
+              <span className="pasos__numero">{i + 1}</span>
+              <div className="pasos__texto">
+                <p className="pasos__momento">{p.momento}</p>
+                <p className="pasos__paso">{p.titulo}</p>
+                <p className="pasos__detalle">{p.texto}</p>
+              </div>
+            </div>
+          ))}
         </div>
 
         <ol className="pasos__marcas" aria-hidden="true">

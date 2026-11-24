@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Modalidad } from "@illari/db";
 import { Illa } from "@illari/ui";
 import { AYUDA, GUIA, MODALIDADES } from "@/lib/contenido";
+import { reproducir } from "@/lib/sonido";
 import { EVENTO_MODALIDAD } from "./Formas";
 
 const CLAVE = "illari:guia-callada";
@@ -47,6 +48,7 @@ export function Guia() {
     if (callada) return;
     setVista({ tipo: "frase" });
     setAbierto(true);
+    reproducir("pop");
   }, [seccion, callada]);
 
   // Se calla sola a los pocos segundos, salvo que estén conversando con ella.
@@ -123,7 +125,10 @@ export function Guia() {
               <ul className="guia__opciones">
                 {AYUDA.opciones.map((o) => (
                   <li key={o.modalidad}>
-                    <button type="button" onClick={() => setVista({ tipo: "resultado", modalidad: o.modalidad })}>
+                    <button type="button" onClick={() => {
+                        setVista({ tipo: "resultado", modalidad: o.modalidad });
+                        reproducir("campanita");
+                      }}>
                       {o.texto}
                     </button>
                   </li>

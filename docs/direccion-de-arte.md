@@ -13,19 +13,17 @@ El servicio existe porque alguien madruga para que el cliente no tenga que hacer
 - **Illa no es 3D.** Es una ilustración que se ve entera y que acompaña y guía al cliente.
 - **Ningún texto se sale ni se encima** con otro texto, con los productos ni con la cabecera.
 - **Tono cálido y humano.** Nada de frases que suenen a robot.
+- **Eligió el estilo Huerta.**
+- **Las frutas de la portada deben verse reales**, no plásticas ni falsas.
+- **Illa debe verse dulce y sonriente**; una versión anterior parecía una señora seria.
+- **Quiere sonidos** que hagan la experiencia más agradable.
 - Rechazó dos paletas (índigo/magenta y rosa/menta con Bodoni) y dos tipografías (Bricolage, Bodoni).
 
-## Estilos en evaluación
+## Estilo: Huerta (elegido por la dueña)
 
-Hay tres estilos de color y letra, intercambiables con el selector temporal de la página (`Estilos.tsx`) o con `?estilo=`. Cuando la dueña elija, se borran los otros dos y el selector.
+Mandarina `#d9480f` como único color de acción; fondos claros en blanco cálido `#fbfaf4`, verde hoja muy claro `#f1f5e2` / `#e7f1de` y mantequilla `#ffe08a` / `#fff3cf`; texto en verde profundo `#14352a`. Letras: **Fraunces** para títulos y **Plus Jakarta Sans** para texto.
 
-| Estilo | Color de acción | Fondos | Letras |
-|---|---|---|---|
-| **Huerta** (propuesto) | Mandarina `#d9480f` | Blanco cálido, verde hoja muy claro, mantequilla | Fraunces + Plus Jakarta Sans |
-| Sol | Azul cobalto `#2447d6` | Blanco, amarillo sol, celeste | Outfit + DM Sans |
-| Rocoto | Rojo rocoto `#c81e2b` | Crema, durazno, oliva claro | Young Serif + Figtree |
-
-Reglas comunes: un solo color de acción por estilo; el resto son neutros y superficies claras. Tres pesos de letra como máximo (400, 500, 600). Títulos con interlineado 1.1; texto 1.55. Cuerpo de 16 px; nada por debajo de 12 px.
+Reglas: un solo color de acción; el resto son neutros y superficies claras. Tres pesos de letra como máximo (400, 500, 600). Títulos con interlineado 1.1; texto 1.55. Cuerpo de 16 px; nada por debajo de 12 px.
 
 ## Logo
 
@@ -33,7 +31,7 @@ Un sol que amanece y cuyos rayos son hojas, sobre una línea de horizonte, junto
 
 ## Illa
 
-La compradora. Ilustración de la cabeza a la cintura, con mandil del color de acción. Tres gestos: saluda, lleva la canasta, celebra. En la web:
+La compradora. Ilustración de la cabeza a la cintura, pensada para verse **dulce y sonriente**: cara redonda, ojos grandes con brillo, mejillas rosadas, sonrisa abierta, dos trenzas con lazos amarillos, blusa bordada y mandil del color de acción. Tres gestos: saluda, lleva la canasta, celebra. En la web:
 
 - Aparece abajo a la derecha, dice una frase al llegar a cada sección y se calla sola a los siete segundos.
 - Ofrece "Ayúdame a elegir": pregunta cómo le gusta comprar a la persona, le recomienda una forma y la lleva al pedido con esa opción ya marcada.
@@ -57,9 +55,13 @@ De tú a tú, como habla una casera de confianza: "Duerme un ratito más", "Tú 
 
 Duraciones de 150, 200 o 300 ms; entra con salida suave y sale con entrada suave; solo se anima posición y opacidad. Lo que depende del scroll lo controla la persona. Con `prefers-reduced-motion` se detiene el giro continuo, la cinta, el parpadeo y el saludo.
 
-## 3D
+## 3D y frutas reales
 
-Productos modelados con geometría propia en Three.js (`apps/web/src/tres`), sin modelos ni texturas descargadas. El lienzo solo dibuja cuando está a la vista.
+La portada usa **frutas y verduras escaneadas de verdad** (Poly Haven, CC0), con su piel, manchas y brillo natural, iluminadas con un estudio de luces propio. Cada modelo pesa menos de 0,4 MB (texturas de 512 px) y se baja en paralelo al abrir la página. El lienzo solo dibuja cuando está a la vista. Créditos en `apps/web/public/frutas/LICENCIA.txt`.
+
+## Sonido
+
+Sintetizado en el navegador, sin archivos de audio, con volumen bajo y solo tras el primer toque de la persona: un golpecito suave al pulsar botones, un pop cuando Illa habla, una notita que sube en cada paso de "cómo funciona", pajaritos y un acorde tibio cuando sale el sol, y un arpegio alegre al enviar el pedido. Se puede silenciar desde la cabecera y la elección se recuerda.
 
 ## Panel y app
 

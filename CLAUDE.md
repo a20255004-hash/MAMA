@@ -53,13 +53,14 @@ docs/           Documentación solo cuando hace falta
 Dirección de arte completa en `docs/direccion-de-arte.md`; leerla antes de tocar la interfaz. Resumen:
 
 - La página son escenas fijas que avanzan con el scroll: apertura 3D en tres actos, carrusel horizontal, pasos con número grande. **Estos efectos le gustan a la dueña: no quitarlos.**
-- **Illa es una ilustración 2D** (`packages/ui/src/Illa.tsx`), no 3D. Debe verse entera y guiar al cliente (frases por sección y ayuda para elegir la forma de compra).
+- **Illa es una ilustración 2D** (`packages/ui/src/Illa.tsx`), no 3D. Debe verse entera, dulce y sonriente (cara redonda, sonrisa abierta, dos trenzas con lazos) y guiar al cliente: frases por sección y ayuda para elegir la forma de compra.
 - **Ningún texto puede salirse ni encimarse** con otro elemento. Verificarlo en 360, 375, 768, 1280 y 1440 px antes de entregar.
 - **Tono cálido y humano**, de tú a tú, como una casera de confianza. Nada que suene a robot.
-- Hay **tres estilos de color y letra en evaluación** (Huerta, Sol, Rocoto) en `packages/ui/src/tokens.css`, con un selector temporal (`apps/web/src/components/Estilos.tsx`). Cuando la dueña elija, borrar los otros dos, el selector y las fuentes sobrantes de `layout.tsx`.
+- **Estilo Huerta, elegido por la dueña** (`packages/ui/src/tokens.css`): mandarina `#d9480f` como único color de acción, fondos claros verde hoja y mantequilla, texto verde profundo. Letras: Fraunces (títulos) y Plus Jakarta Sans (texto).
 - Rechazados: fondos oscuros, ilustraciones planas de plantilla, secciones apiladas, índigo/magenta, rosa/menta, Bricolage Grotesque y Bodoni Moda.
 - Logo: sol que amanece con rayos de hojas (`packages/ui/src/Logo.tsx`).
-- El 3D está en `apps/web/src/tres` y usa solo geometría propia.
+- **Las frutas de la portada son reales**, no dibujadas ni plásticas: modelos escaneados de Poly Haven (CC0) en `apps/web/public/frutas`, con texturas de 512 px. Se cargan desde `apps/web/src/tres/Frutos.tsx` respetando `NEXT_PUBLIC_BASE_PATH`. Hay palta, limón, lima, manzana, cebolla, camote, granada y kiwi; **no hay tomate ni zanahoria** reales disponibles. Se descartaron plátanos y peras porque el modelo salía como deditos sueltos.
+- **Sonidos** sintetizados con Web Audio (`apps/web/src/lib/sonido.ts`), sin archivos de audio: golpecito al pulsar botones, pop cuando Illa habla, notita que sube en cada paso, pajaritos al amanecer y arpegio al enviar el pedido. Botón para silenciar en la cabecera; la elección se recuerda. Los navegadores solo dejan sonar tras el primer toque o clic de la persona.
 
 Reglas de diseño de la dueña (globales): dirección de arte antes del código, nada de plantilla genérica, movimiento con función, responsive, accesible y `prefers-reduced-motion` respetado, verificar en navegador en escritorio y móvil, y decir qué skills se invocaron realmente.
 

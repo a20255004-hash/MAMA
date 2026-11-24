@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, transform, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { Suspense, useRef } from "react";
+import { motion, transform, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { MARCA, enlaceWhatsApp } from "@illari/ui";
 import { Cosecha } from "@/tres/Cosecha";
+import { reproducir } from "@/lib/sonido";
+import { usePrecargarFrutas } from "@/tres/Frutos";
 import { Lienzo } from "@/tres/Lienzo";
 
 /**
@@ -14,6 +16,7 @@ import { Lienzo } from "@/tres/Lienzo";
 export function Historia() {
   const pista = useRef<HTMLDivElement>(null);
   const quieto = useReducedMotion() ?? false;
+  usePrecargarFrutas(); // fuera de Suspense: las diez frutas se bajan a la vez
   const { scrollYProgress: t } = useScroll({ target: pista, offset: ["start start", "end end"] });
 
   // En forma de función: el cálculo lo hace siempre el mismo código, en todos los navegadores.
@@ -23,12 +26,25 @@ export function Historia() {
   const opacidad3 = useTransform(() => transform(t.get(), [0.86, 0.94], [0, 1]));
   const toca1 = useTransform(() => (t.get() < 0.14 ? "auto" : "none"));
 
+  // Suena una sola vez cada vez que sale el sol; vuelve a armarse si la persona sube de nuevo.
+  const yaAmanecio = useRef(false);
+  useMotionValueEvent(t, "change", (v) => {
+    if (v > 0.86 && !yaAmanecio.current) {
+      yaAmanecio.current = true;
+      reproducir("amanecer");
+    } else if (v < 0.7) {
+      yaAmanecio.current = false;
+    }
+  });
+
   return (
     <section ref={pista} id="inicio" className="historia" data-guia="inicio">
       <div className="historia__escena">
         <motion.div className="historia__amanecer" style={{ opacity: amanece }} aria-hidden="true" />
         <Lienzo className="historia__lienzo">
-          <Cosecha avance={t} quieto={quieto} />
+          <Suspense fallback={null}>
+            <Cosecha avance={t} quieto={quieto} />
+          </Suspense>
         </Lienzo>
 
         <motion.div className="acto acto--uno" style={{ opacity: opacidad1, pointerEvents: toca1 }}>

@@ -186,6 +186,39 @@ svg {
   text-decoration: none;
 }
 
+.cabecera__lado {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.sonido {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  background: none;
+  border: 1.5px solid var(--linea);
+  border-radius: 50%;
+  color: var(--tinta);
+  cursor: pointer;
+  transition:
+    background-color var(--m-150) var(--entra),
+    border-color var(--m-150) var(--entra),
+    color var(--m-150) var(--entra);
+}
+
+.sonido:hover {
+  border-color: var(--tinta);
+}
+
+.sonido[aria-pressed="true"] {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--fondo);
+}
+
 .cabecera__nav {
   display: none;
   gap: var(--e-6);
@@ -471,9 +504,37 @@ svg {
 
 .pasos__cuerpo {
   display: grid;
+  align-items: center;
+  min-height: 0;
+}
+
+/* Los cuatro pasos comparten el mismo lugar y se cruzan con una transición. */
+.paso {
+  grid-area: 1 / 1;
+  display: grid;
   align-content: center;
   gap: var(--e-3);
-  min-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity var(--m-150) var(--sale),
+    transform var(--m-150) var(--sale),
+    visibility 0s linear var(--m-150);
+}
+
+.paso[data-estado="antes"] {
+  transform: translateY(-8px);
+}
+
+.paso[data-estado="activo"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity var(--m-200) var(--entra) var(--m-150),
+    transform var(--m-200) var(--entra) var(--m-150),
+    visibility 0s;
 }
 
 .pasos__numero {
@@ -527,7 +588,7 @@ svg {
     padding-bottom: var(--e-6);
   }
 
-  .pasos__cuerpo {
+  .paso {
     grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
     align-items: center;
     gap: var(--e-7);
@@ -968,7 +1029,7 @@ svg {
 
 .guia__illa {
   flex: none;
-  width: 4.75rem;
+  width: 3.75rem;
   padding: 0;
   background: none;
   border: 0;
@@ -984,7 +1045,7 @@ svg {
 
 @media (min-width: 62rem) {
   .guia__illa {
-    width: 6rem;
+    width: 5rem;
   }
 }
 
@@ -1003,7 +1064,7 @@ svg {
 }
 
 .illa__saludo {
-  transform-origin: 176px 196px;
+  transform-origin: 178px 208px;
   animation: saluda var(--m-300) var(--entra) 3 alternate;
 }
 
@@ -1032,41 +1093,6 @@ svg {
     opacity: 0;
     transform: translateY(6px);
   }
-}
-
-/* Selector de estilos (temporal) ---------------------------------------------- */
-
-.estilos {
-  position: fixed;
-  left: var(--e-3);
-  top: 4.5rem;
-  z-index: 40;
-  display: flex;
-  align-items: center;
-  gap: var(--e-1);
-  padding: 0.25rem 0.25rem 0.25rem 0.75rem;
-  background: #fff;
-  border: 1px solid var(--linea);
-  border-radius: var(--r-pastilla);
-  box-shadow: var(--sombra);
-  font-size: var(--t-meta);
-  font-weight: 500;
-}
-
-.estilos button {
-  min-height: 2rem;
-  padding: 0.2rem 0.7rem;
-  background: none;
-  border: 0;
-  border-radius: var(--r-pastilla);
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-}
-
-.estilos button[aria-pressed="true"] {
-  background: var(--tinta);
-  color: var(--fondo);
 }
 
 /* Movimiento reducido ---------------------------------------------------------- */

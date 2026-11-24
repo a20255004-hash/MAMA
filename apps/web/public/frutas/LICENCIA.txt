@@ -1,0 +1,4 @@
+Modelos 3D de frutas y verduras: Poly Haven (https://polyhaven.com), licencia CC0 (dominio público).
+Modelos: food_avocado_01, lemon, food_lime_01, food_apple_01, yellow_onion,
+sweet_potato, food_pomegranate_01, food_kiwi_01.
+Las texturas se redujeron a 512 px para que la página cargue rápido.

@@ -1,6 +1,5 @@
 import { Logo, MARCA, enlaceWhatsApp } from "@illari/ui";
 import { Cabecera } from "@/components/Cabecera";
-import { Estilos } from "@/components/Estilos";
 import { Formas } from "@/components/Formas";
 import { Guia } from "@/components/Guia";
 import { Historia } from "@/components/Historia";
@@ -47,7 +46,6 @@ export default function Pagina() {
       </footer>
 
       <Guia />
-      <Estilos />
     </>
   );
 }

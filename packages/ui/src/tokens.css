@@ -1,13 +1,10 @@
 /*
  * Illari — tokens de diseño compartidos por la web, la app y el panel.
- * Reglas: todos los fondos son claros; un solo color de acción por estilo;
+ * Estilo "Huerta", elegido por la dueña: verde de hoja y mandarina sobre blanco cálido.
+ * Reglas: todos los fondos son claros; un solo color de acción;
  * tres pesos de letra como máximo (400, 500, 600).
- *
- * Hay tres estilos en evaluación. La dueña elige uno y los otros dos se borran.
  */
-:root,
-:root[data-estilo="huerta"] {
-  /* Huerta: verde de hoja y mandarina sobre blanco cálido. */
+:root {
   --fondo: #fbfaf4; /* lienzo: la mayor parte de la página */
   --apertura: #f1f5e2; /* primera luz de la portada */
   --amanecer: #ffe08a; /* la portada cuando sale el sol */
@@ -16,69 +13,19 @@
   --tarjeta-a: #dcebcf;
   --tarjeta-c: #ffe08a;
   --tarjeta-d: #f7e6d3;
-  --accion: #d9480f; /* único color de acción */
+  --accion: #d9480f; /* único color de acción: mandarina */
   --accion-osc: #b23a0a;
   --accion-texto: #ffffff;
-  --tinta: #14352a; /* texto */
+  --tinta: #14352a; /* texto: verde profundo */
   --tinta-suave: #4b6358; /* texto secundario */
   --linea: rgb(20 53 42 / 0.16);
 
-  --f-titulo: var(--font-fraunces), Georgia, serif;
-  --f-texto: var(--font-jakarta), system-ui, sans-serif;
+  /* Tipografía: Fraunces para títulos, Plus Jakarta Sans para texto. */
+  --f-titulo: var(--font-titulo), Georgia, serif;
+  --f-texto: var(--font-texto), system-ui, sans-serif;
   --peso-titulo: 500;
-  --cursiva: italic;
   --apretado: -0.02em;
-}
 
-:root[data-estilo="sol"] {
-  /* Sol de Tacna: amarillo de sol y azul cobalto. */
-  --fondo: #fffdf6;
-  --apertura: #fff5cf;
-  --amanecer: #ffd24a;
-  --calida: #fff0c2;
-  --fresca: #e9f0ff;
-  --tarjeta-a: #dce7ff;
-  --tarjeta-c: #ffd24a;
-  --tarjeta-d: #ffe7dc;
-  --accion: #2447d6;
-  --accion-osc: #1b37a8;
-  --accion-texto: #ffffff;
-  --tinta: #101b3f;
-  --tinta-suave: #4a557a;
-  --linea: rgb(16 27 63 / 0.16);
-
-  --f-titulo: var(--font-outfit), system-ui, sans-serif;
-  --f-texto: var(--font-dm), system-ui, sans-serif;
-  --peso-titulo: 600;
-  --cursiva: normal;
-  --apretado: -0.03em;
-}
-
-:root[data-estilo="rocoto"] {
-  /* Rocoto: rojo de rocoto y oliva sobre crema. */
-  --fondo: #fffbf5;
-  --apertura: #fdefe3;
-  --amanecer: #f9c77e;
-  --calida: #fcebd5;
-  --fresca: #eef0dc;
-  --tarjeta-a: #e3e8c8;
-  --tarjeta-c: #f9c77e;
-  --tarjeta-d: #f6ddd3;
-  --accion: #c81e2b;
-  --accion-osc: #9f1622;
-  --accion-texto: #ffffff;
-  --tinta: #2a1a14;
-  --tinta-suave: #6b564c;
-  --linea: rgb(42 26 20 / 0.16);
-
-  --f-titulo: var(--font-young), Georgia, serif;
-  --f-texto: var(--font-figtree), system-ui, sans-serif;
-  --peso-titulo: 400;
-  --cursiva: normal;
-  --apretado: -0.015em;
-}
-
-:root {
   /* Tamaños: cuerpo 1rem, secundario 0.875rem, meta 0.75rem. Nada por debajo. */
   --t-meta: 0.75rem;
   --t-sec: 0.875rem;
