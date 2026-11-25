@@ -2,7 +2,9 @@
 export const MARCA = {
   nombre: "Illari",
   /** "Illari" significa amanecer en quechua. */
-  lema: "Tu mercado, listo cuando amanece.",
+  lema: "Duerme un ratito más. Hoy vamos al mercado por ti.",
+  /** Nombre del panel interno de administración. */
+  nombrePanel: "Illari Central",
   ciudad: "Tacna",
   mercado: "Mercado Grau",
   /** WhatsApp del negocio, con código de país y sin signos. */

@@ -29,12 +29,11 @@
 - [ ] Crear el proyecto de Supabase y aplicar la migración (requiere autorización de la dueña).
 - [ ] Probar el guardado real de una solicitud.
 
-## Decisiones pendientes de la dueña (marca)
+## Decisiones pendientes de la dueña
 
-- Elegir nombre, lema, logo, colores, letras y elementos característicos con la página de opciones (artefacto "Opciones de marca Illari").
-- Autorizar la creación de la base de datos gratuita (Supabase). De ella dependen las solicitudes, los reclamos, el panel interno y la app de clientes.
-- Aprobar la estructura propuesta para la web: Quiénes somos, Nuestros compromisos, Dónde llegamos, Preguntas frecuentes y pie de página completo con Libro de Reclamaciones.
-- Accesibilidad: el mandarina actual (#D9480F) da 4,3:1 con texto blanco; se propone #C7400C (5,0:1) al fijar la paleta.
+- **Letras:** elegir de la segunda ronda (artefacto "Letras de Illari") o indicar una referencia que le guste. Ya decidió: nombre, lema, logo, colores y nombre del panel.
+- **Base de datos:** crear el proyecto gratuito de Supabase (la herramienta de creación pide un paso de confirmación de costo que no está disponible en la sesión; se crea a mano en el panel de Supabase, región São Paulo). De ella dependen las solicitudes, los reclamos, el panel interno y la app de clientes.
+- **Estructura de la web:** aprobar Quiénes somos, Nuestros compromisos, Dónde llegamos, Preguntas frecuentes y el pie de página completo con Libro de Reclamaciones.
 
 ## Datos que debe entregar la dueña
 

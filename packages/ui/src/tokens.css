@@ -1,6 +1,6 @@
 /*
  * Illari — tokens de diseño compartidos por la web, la app y el panel.
- * Estilo "Huerta", elegido por la dueña: verde de hoja y mandarina sobre blanco cálido.
+ * Estilo "Huerta" (paleta P1), elegido por la dueña: verde de hoja y mandarina sobre blanco cálido.
  * Reglas: todos los fondos son claros; un solo color de acción;
  * tres pesos de letra como máximo (400, 500, 600).
  */
@@ -13,8 +13,8 @@
   --tarjeta-a: #dcebcf;
   --tarjeta-c: #ffe08a;
   --tarjeta-d: #f7e6d3;
-  --accion: #d9480f; /* único color de acción: mandarina */
-  --accion-osc: #b23a0a;
+  --accion: #c7400c; /* único color de acción: mandarina (5,0:1 con texto blanco) */
+  --accion-osc: #a33409; /* texto de acento sobre fondos claros (6,6:1) */
   --accion-texto: #ffffff;
   --tinta: #14352a; /* texto: verde profundo */
   --tinta-suave: #4b6358; /* texto secundario */

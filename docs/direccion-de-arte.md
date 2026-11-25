@@ -21,13 +21,16 @@ El servicio existe porque alguien madruga para que el cliente no tenga que hacer
 
 ## Estilo: Huerta (elegido por la dueña)
 
-Mandarina `#d9480f` como único color de acción; fondos claros en blanco cálido `#fbfaf4`, verde hoja muy claro `#f1f5e2` / `#e7f1de` y mantequilla `#ffe08a` / `#fff3cf`; texto en verde profundo `#14352a`. Letras: **Fraunces** para títulos y **Plus Jakarta Sans** para texto.
+Mandarina `#c7400c` (ajustada: da 5,0:1 con texto blanco, el `#d9480f` original solo 4,3:1) como único color de acción; fondos claros en blanco cálido `#fbfaf4`, verde hoja muy claro `#f1f5e2` / `#e7f1de` y mantequilla `#ffe08a` / `#fff3cf`; texto en verde profundo `#14352a`. 
+**Letras: pendientes.** La dueña no quedó convencida con ninguna de las cinco parejas de la primera ronda. Fraunces y Plus Jakarta Sans son provisionales. La segunda ronda propone ocho direcciones distintas (redondas y amables, modernas y limpias, con carácter de mercado) y un toque a mano opcional (Caveat).
 
 Reglas: un solo color de acción; el resto son neutros y superficies claras. Tres pesos de letra como máximo (400, 500, 600). Títulos con interlineado 1.1; texto 1.55. Cuerpo de 16 px; nada por debajo de 12 px.
 
 ## Logo
 
-Un sol que amanece y cuyos rayos son hojas, sobre una línea de horizonte, junto al nombre en minúsculas. "Illari" es amanecer; las hojas dicen que lo que llega es fresco. Está en `packages/ui/src/Logo.tsx` y como ícono en `apps/web/src/app/icon.svg`.
+**"La i-sol"**, elegido por la dueña: el nombre en minúsculas y un sol de ocho rayos como punto de la primera "i". "Illari" es amanecer. Está en `packages/ui/src/Logo.tsx`; el sol solo es el ícono de la pestaña (`apps/web/src/app/icon.svg`). La posición del sol depende de la letra elegida y se mide al fijarla. El "sol de hojas" (rayos en forma de hoja) queda como símbolo secundario para divisores y sellos.
+
+**Lema:** "Duerme un ratito más. Hoy vamos al mercado por ti." **Panel interno:** "Illari Central". **App de clientes:** "Illari".
 
 ## Illa
 
