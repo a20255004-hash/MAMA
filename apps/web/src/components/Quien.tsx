@@ -23,13 +23,14 @@ export function Quien() {
       </div>
 
       <div className="quien__cuerpo">
+        <h2 className="quien__titulo">Compramos como para nuestra mesa.</h2>
+
         <div className="quien__retrato">
           <Illa gesto="canasta" titulo="Illa con su canasta llena de la compra del día" />
         </div>
 
         <div className="quien__texto">
-          <h2 className="titulo-2">Compramos como para nuestra mesa.</h2>
-          <p className="bajada">
+          <p className="quien__bajada">
             Detrás de cada compra hay una mamá con años de mercado encima. Sabe cuándo la palta está en su punto, qué
             tomate aguanta la semana y cuándo es mejor esperar a mañana.
           </p>

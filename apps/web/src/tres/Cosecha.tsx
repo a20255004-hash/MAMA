@@ -12,6 +12,10 @@ const PIEZAS: Tipo[] = [
 ];
 const N = PIEZAS.length;
 
+// La cámara del lienzo tiene 36° de campo de visión (ver Lienzo.tsx): la mitad son 18°.
+const TAN_MITAD_FOV = Math.tan(THREE.MathUtils.degToRad(18));
+const RADIO_FRUTA = 0.5; // mitad del tamaño de una fruta, en unidades de la escena
+
 const suavizar = (a: number, b: number, x: number) => {
   const t = Math.min(Math.max((x - a) / (b - a), 0), 1);
   return t * t * (3 - 2 * t);
@@ -35,12 +39,14 @@ export function Cosecha({ avance, quieto }: { avance: MotionValue<number>; quiet
       const y = 1 - (i / (N - 1)) * 2;
       const r = Math.sqrt(1 - y * y);
       const racimo = new THREE.Vector3(Math.cos(aureo * i) * r, y, Math.sin(aureo * i) * r).multiplyScalar(1.55);
-      // Vuelo: túnel alrededor del eje de la cámara.
-      const a = (i / N) * Math.PI * 2 * 2.3;
-      const vuelo = new THREE.Vector3(Math.cos(a) * (3.1 + (i % 3) * 0.7), Math.sin(a) * (2 + (i % 2) * 0.5), -7 + i * 0.95);
+      // Vuelo: cada pieza recibe tres números repartidos al azar (pero fijos) que luego se
+      // convierten en posición según el tamaño de la pantalla, para dejar libre el centro.
+      const u = (i * 0.618034) % 1;
+      const v = (i * 0.381966 + 0.17) % 1;
+      const w = (i * 0.754878) % 1;
       // Repisa: dos filas de ocho.
       const repisa = new THREE.Vector3(((i % 8) - 3.5) * 1.12, i < 8 ? 0.72 : -0.72, 0);
-      return { racimo, vuelo, repisa, giro: 0.25 + ((i * 37) % 10) / 14, fase: i * 1.7 };
+      return { racimo, repisa, u, v, w, giro: 0.25 + ((i * 37) % 10) / 14, fase: i * 1.7 };
     });
   }, []);
 
@@ -64,6 +70,7 @@ export function Cosecha({ avance, quieto }: { avance: MotionValue<number>; quiet
     const centroX = angosto ? 0 : viewport.width * 0.25;
     const centroY = angosto ? viewport.height * (0.5 - (64 + franja / 2) / size.height) : -0.1;
     const giroRacimo = reloj * 0.22 + t * 5;
+    const aspecto = size.width / size.height;
 
     destinos.forEach((d, i) => {
       const pieza = piezas.current[i];
@@ -71,8 +78,30 @@ export function Cosecha({ avance, quieto }: { avance: MotionValue<number>; quiet
       tmp.copy(d.racimo).applyAxisAngle(THREE.Object3D.DEFAULT_UP, giroRacimo).multiplyScalar(escala);
       tmp.x += centroX * (1 - aVuelo);
       tmp.y += centroY * (1 - aVuelo) + Math.sin(reloj * 0.9 + d.fase) * 0.06;
-      tmp2.copy(d.vuelo);
-      tmp2.z += aVuelo * 6 - aRepisa * 2;
+      // Vuelo: las frutas se reparten por los bordes, a distintas profundidades, y nunca por el
+      // centro, que es donde se lee la frase. En pantallas anchas van a los costados; en
+      // celular, arriba y abajo.
+      const z = -5 + d.w * 8;
+      const mitadAlto = (camera.position.z - z) * TAN_MITAD_FOV;
+      const mitadAncho = mitadAlto * aspecto;
+      const deriva = quieto ? 0 : 0.1;
+      if (aspecto >= 1.15) {
+        const lado = i % 2 ? 1 : -1;
+        const x = Math.min(0.64 * mitadAncho + RADIO_FRUTA + d.u * 0.3 * mitadAncho, mitadAncho * 1.02);
+        tmp2.set(
+          lado * x + Math.sin(reloj * 0.6 + d.fase) * deriva,
+          (d.v * 2 - 1) * mitadAlto * 0.85 + Math.cos(reloj * 0.5 + d.fase) * deriva,
+          z,
+        );
+      } else {
+        const lado = i % 2 ? 1 : -1;
+        const y = Math.min(0.34 * mitadAlto + RADIO_FRUTA + d.u * 0.4 * mitadAlto, mitadAlto * 0.97);
+        tmp2.set(
+          (d.v * 2 - 1) * mitadAncho * 0.85 + Math.sin(reloj * 0.6 + d.fase) * deriva,
+          lado * y + Math.cos(reloj * 0.5 + d.fase) * deriva,
+          z,
+        );
+      }
       tmp.lerp(tmp2, aVuelo);
       tmp2.copy(d.repisa).multiplyScalar(angosto ? 0.42 : Math.min(1, viewport.width / 10.5));
       tmp2.y += viewport.height * (angosto ? 0.14 : 0.2);
