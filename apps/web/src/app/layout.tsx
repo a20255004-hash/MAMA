@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Caveat, Figtree, Fredoka } from "next/font/google";
 import { MARCA } from "@illari/ui";
 import "@illari/ui/tokens.css";
 import "./globals.css";
 
-const titulo = Fraunces({ subsets: ["latin"], variable: "--font-titulo", display: "swap" });
-const texto = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-texto", display: "swap" });
+// Letras elegidas por la dueña: Fredoka para títulos, Figtree para texto y Caveat como toque a mano.
+const titulo = Fredoka({ subsets: ["latin"], variable: "--font-titulo", display: "swap" });
+const texto = Figtree({ subsets: ["latin"], variable: "--font-texto", display: "swap" });
+const mano = Caveat({ subsets: ["latin"], variable: "--font-mano", display: "swap" });
 
 export const metadata: Metadata = {
   title: `${MARCA.nombre} — tu mercado del ${MARCA.mercado}, hecho por nosotras`,
@@ -27,7 +29,7 @@ export const viewport: Viewport = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-PE" className={`${titulo.variable} ${texto.variable}`}>
+    <html lang="es-PE" className={`${titulo.variable} ${texto.variable} ${mano.variable}`}>
       <body>
         <a className="saltar" href="#contenido">
           Ir al contenido

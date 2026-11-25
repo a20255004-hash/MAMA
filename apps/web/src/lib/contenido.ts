@@ -83,6 +83,12 @@ export const CRITERIOS: { titulo: string; texto: string }[] = [
   },
 ];
 
+/** Notas a mano (Caveat): cortas, grandes y siempre con sentido; no se usan en párrafos. */
+export const MANO = {
+  quien: "Escogido hoy por Illa",
+  cierre: "Con cariño, Illa",
+} as const;
+
 export const CINTA = ["Frutas", "Verduras", "Papas", "Carnes", "Pollo", "Huevos", "Abarrotes", "Hierbas"];
 
 /** Lo que dice Illa según la parte de la página que se está viendo. */

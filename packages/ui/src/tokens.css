@@ -20,11 +20,13 @@
   --tinta-suave: #4b6358; /* texto secundario */
   --linea: rgb(20 53 42 / 0.16);
 
-  /* Tipografía: Fraunces para títulos, Plus Jakarta Sans para texto. */
-  --f-titulo: var(--font-titulo), Georgia, serif;
+  /* Tipografía (elegida por la dueña): Fredoka para títulos, Figtree para texto y
+     Caveat como toque a mano, solo en notas cortas y grandes (nunca en párrafos). */
+  --f-titulo: var(--font-titulo), "Arial Rounded MT Bold", system-ui, sans-serif;
   --f-texto: var(--font-texto), system-ui, sans-serif;
-  --peso-titulo: 500;
-  --apretado: -0.02em;
+  --f-mano: var(--font-mano), "Segoe Script", "Bradley Hand", cursive;
+  --peso-titulo: 600;
+  --apretado: -0.01em;
 
   /* Tamaños: cuerpo 1rem, secundario 0.875rem, meta 0.75rem. Nada por debajo. */
   --t-meta: 0.75rem;

@@ -96,7 +96,7 @@ export function Pedir() {
         <div className="pedir__listo" role="status">
           <Illa gesto="celebra" className="pedir__illa" />
           <div>
-            <h3>¡Listo, {estado.nombre}! Ya casi.</h3>
+            <h3 className="mano-titulo">¡Listo, {estado.nombre}! Ya casi.</h3>
             <p>Se abrió WhatsApp con tu pedido escrito. Dale a enviar y conversamos. Si no se abrió, ábrelo aquí.</p>
             <div className="pedir__acciones">
               <a className="boton boton--accion" href={estado.enlace} target="_blank" rel="noopener noreferrer">

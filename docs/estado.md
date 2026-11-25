@@ -31,7 +31,7 @@
 
 ## Decisiones pendientes de la dueña
 
-- **Letras:** elegir de la segunda ronda (artefacto "Letras de Illari") o indicar una referencia que le guste. Ya decidió: nombre, lema, logo, colores y nombre del panel.
+- **Marca:** ya decidió nombre, lema, logo, colores, letras y nombre del panel. Faltan los elementos característicos (toldo, cenefa andina, etiquetas, sello) si quiere sumarlos.
 - **Base de datos:** crear el proyecto gratuito de Supabase (la herramienta de creación pide un paso de confirmación de costo que no está disponible en la sesión; se crea a mano en el panel de Supabase, región São Paulo). De ella dependen las solicitudes, los reclamos, el panel interno y la app de clientes.
 - **Estructura de la web:** aprobar Quiénes somos, Nuestros compromisos, Dónde llegamos, Preguntas frecuentes y el pie de página completo con Libro de Reclamaciones.
 

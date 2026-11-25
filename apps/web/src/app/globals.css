@@ -633,7 +633,7 @@ svg {
 }
 
 .quien__titulo {
-  max-width: 13ch;
+  max-width: 15ch;
   font-family: var(--f-titulo);
   font-weight: var(--peso-titulo);
   font-size: clamp(2.25rem, 1rem + 6.4vw, 7rem);
@@ -644,6 +644,7 @@ svg {
 }
 
 .quien__retrato {
+  position: relative;
   justify-self: center;
   width: min(100%, 22rem);
   padding: var(--e-5) var(--e-5) 0;
@@ -1130,6 +1131,42 @@ svg {
     opacity: 0;
     transform: translateY(6px);
   }
+}
+
+/* Toque a mano (Caveat): solo notas cortas y grandes ----------------------------- */
+
+.mano-etiqueta,
+.pie__firma,
+.pedir__listo h3.mano-titulo {
+  font-family: var(--f-mano);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.mano-etiqueta {
+  position: absolute;
+  right: var(--e-3);
+  top: var(--e-4);
+  max-width: 11rem;
+  padding: 0.35rem 0.9rem 0.45rem;
+  background: var(--tarjeta-c);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-chico);
+  box-shadow: var(--sombra);
+  font-size: 1.7rem;
+  color: var(--tinta);
+  text-align: center;
+  transform: rotate(4deg);
+}
+
+.pie__firma {
+  font-size: 2rem;
+  color: var(--accion-osc);
+}
+
+.pedir__listo h3.mano-titulo {
+  font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem);
 }
 
 /* Movimiento reducido ---------------------------------------------------------- */

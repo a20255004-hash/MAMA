@@ -6,6 +6,7 @@ import { Historia } from "@/components/Historia";
 import { Pasos } from "@/components/Pasos";
 import { Pedir } from "@/components/Pedir";
 import { Quien } from "@/components/Quien";
+import { MANO } from "@/lib/contenido";
 
 export default function Pagina() {
   return (
@@ -35,6 +36,7 @@ export default function Pagina() {
         <p className="pie__frase">
           {MARCA.nombre} significa amanecer en quechua. Así queremos que empiece tu día: con tu mercado ya hecho.
         </p>
+        <p className="pie__firma">{MANO.cierre}</p>
         <div className="pie__fila">
           <p>
             {MARCA.mercado}, {MARCA.ciudad}, Perú

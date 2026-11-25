@@ -38,13 +38,14 @@ export function Simbolo(props: SVGProps<SVGSVGElement>) {
  * Logo "la i-sol": el nombre en minúsculas, con un sol en lugar del punto de la primera "i".
  * Usa la letra de títulos y se escala con el tamaño de letra del lugar donde se ponga.
  * La "ı" sin punto es la letra del alfabeto turco; aquí solo sirve para dejar sitio al sol.
+ * La altura del sol (`top`) está medida para Fredoka 600 con interlineado 1.15: si cambia la letra, hay que volver a medirla.
  */
 export function Logo({ className }: { className?: string }) {
   return (
-    <span className={className} role="img" aria-label={MARCA.nombre} style={{ display: "inline-block", lineHeight: 1 }}>
+    <span className={className} role="img" aria-label={MARCA.nombre} style={{ display: "inline-block", lineHeight: 1.15 }}>
       <span
         aria-hidden="true"
-        style={{ fontFamily: "var(--f-titulo)", fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1 }}
+        style={{ fontFamily: "var(--f-titulo)", fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.15 }}
       >
         <span style={{ position: "relative", display: "inline-block" }}>
           ı
@@ -52,7 +53,7 @@ export function Logo({ className }: { className?: string }) {
             style={{
               position: "absolute",
               left: "50%",
-              top: "-0.16em",
+              top: "-0.065em",
               width: "0.5em",
               height: "0.5em",
               transform: "translateX(-50%)",
