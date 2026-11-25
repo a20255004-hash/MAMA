@@ -29,8 +29,16 @@
 - [ ] Crear el proyecto de Supabase y aplicar la migración (requiere autorización de la dueña).
 - [ ] Probar el guardado real de una solicitud.
 
+## Decisiones pendientes de la dueña (marca)
+
+- Elegir nombre, lema, logo, colores, letras y elementos característicos con la página de opciones (artefacto "Opciones de marca Illari").
+- Autorizar la creación de la base de datos gratuita (Supabase). De ella dependen las solicitudes, los reclamos, el panel interno y la app de clientes.
+- Aprobar la estructura propuesta para la web: Quiénes somos, Nuestros compromisos, Dónde llegamos, Preguntas frecuentes y pie de página completo con Libro de Reclamaciones.
+- Accesibilidad: el mandarina actual (#D9480F) da 4,3:1 con texto blanco; se propone #C7400C (5,0:1) al fijar la paleta.
+
 ## Datos que debe entregar la dueña
 
+- Datos legales para el pie de página y los textos legales: razón social (o nombre completo con RUC), RUC, domicilio, correo de contacto, horario y redes. Si falta alguno, no se muestra: no se inventa.
 - Consultar "Illari" en el buscador de marcas de INDECOPI antes de registrarla.
 - Paquetes reales: nombres y contenido.
 - Modelo de cobro del servicio (solo para el panel; no se publica).
