@@ -5,10 +5,10 @@ import { MARCA } from "./marca";
 export function Sol(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" {...props}>
-      <circle cx="10" cy="10" r="4.2" fill="var(--accion)" />
+      <circle cx="10" cy="10" r="4.2" fill="var(--sol)" />
       <path
         d="M10 1.5v2.6M10 15.9v2.6M1.5 10h2.6M15.9 10h2.6M4 4l1.8 1.8M14.2 14.2L16 16M16 4l-1.8 1.8M5.8 14.2L4 16"
-        stroke="var(--accion)"
+        stroke="var(--sol-rayo)"
         strokeWidth="1.7"
         strokeLinecap="round"
         fill="none"
@@ -45,7 +45,18 @@ export function Logo({ className }: { className?: string }) {
     <span className={className} role="img" aria-label={MARCA.nombre} style={{ display: "inline-block", lineHeight: 1.15 }}>
       <span
         aria-hidden="true"
-        style={{ fontFamily: "var(--f-titulo)", fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.15 }}
+        style={{
+          fontFamily: "var(--f-titulo)",
+          fontWeight: 600,
+          letterSpacing: "-0.02em",
+          lineHeight: 1.15,
+          // Colores del sol: del ámbar al naranja profundo, siempre legibles sobre fondo claro.
+          background: "linear-gradient(90deg, var(--logo-a), var(--logo-b) 55%, var(--logo-c))",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          color: "var(--logo-b)",
+        }}
       >
         <span style={{ position: "relative", display: "inline-block" }}>
           ı

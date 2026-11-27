@@ -1,0 +1,638 @@
+/*
+ * Illari — base compartida por la app de clientes y por Illari Central.
+ * Parte de tokens.css. Todo es claro; el verde profundo solo se usa para texto.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --error: #b42318;
+  --error-fondo: #fdecea;
+  --bien: #1f6b3a;
+  --bien-fondo: #e3f3e6;
+  --aviso-fondo: #fff3cf;
+  --barra: 3.75rem;
+  --nav-inferior: 4.25rem;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--f-texto);
+  font-size: var(--t-base);
+  line-height: var(--alto-texto);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+fieldset,
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+fieldset {
+  border: 0;
+  min-width: 0;
+}
+
+a {
+  color: inherit;
+}
+
+svg {
+  display: block;
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: var(--foco);
+  outline-offset: 3px;
+}
+
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Títulos y textos ---------------------------------------------------------- */
+
+.t-titulo,
+.t-pagina,
+.t-seccion {
+  font-family: var(--f-titulo);
+  font-weight: var(--peso-titulo);
+  line-height: var(--alto-titulo);
+  letter-spacing: var(--apretado);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.t-pagina {
+  font-size: var(--t-2xl);
+}
+
+.t-titulo {
+  font-size: var(--t-xl);
+}
+
+.t-seccion {
+  font-size: var(--t-lg);
+}
+
+.t-suave {
+  color: var(--tinta-suave);
+}
+
+.t-meta {
+  font-size: var(--t-sec);
+  color: var(--tinta-suave);
+}
+
+.t-mano {
+  font-family: var(--f-mano);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--accion-osc);
+}
+
+.t-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Botones ------------------------------------------------------------------- */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+  min-height: 3rem;
+  padding: 0.65rem 1.4rem;
+  border: 1.5px solid transparent;
+  border-radius: var(--r-pastilla);
+  background: none;
+  color: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--m-150) var(--entra),
+    color var(--m-150) var(--entra),
+    border-color var(--m-150) var(--entra),
+    transform var(--m-150) var(--entra);
+}
+
+.boton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.boton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.boton--accion {
+  background: var(--accion);
+  color: var(--accion-texto);
+}
+
+.boton--accion:hover:not(:disabled) {
+  background: var(--accion-osc);
+}
+
+.boton--borde {
+  border-color: var(--tinta);
+  color: var(--tinta);
+}
+
+.boton--borde:hover:not(:disabled) {
+  background: var(--tinta);
+  color: var(--fondo);
+}
+
+.boton--suave {
+  background: var(--fresca);
+  color: var(--tinta);
+}
+
+.boton--suave:hover:not(:disabled) {
+  background: var(--tarjeta-a);
+}
+
+.boton--peligro {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.boton--peligro:hover:not(:disabled) {
+  background: var(--error);
+  color: #fff;
+}
+
+.boton--chico {
+  min-height: 2.5rem;
+  padding: 0.35rem 1.1rem;
+  font-size: var(--t-sec);
+}
+
+.boton--grande {
+  min-height: 3.5rem;
+  font-size: var(--t-lg);
+}
+
+.boton--ancho {
+  width: 100%;
+}
+
+.enlace {
+  color: var(--accion-osc);
+  font-weight: 600;
+  text-underline-offset: 3px;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Formularios --------------------------------------------------------------- */
+
+.campo {
+  display: grid;
+  gap: var(--e-1);
+  min-width: 0;
+}
+
+.campo > label,
+.campo > .campo__titulo {
+  font-weight: 600;
+  font-size: var(--t-sec);
+}
+
+.campo__ayuda {
+  font-size: var(--t-meta);
+  color: var(--tinta-suave);
+}
+
+.campo__error {
+  font-size: var(--t-sec);
+  color: var(--error);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.6rem 0.9rem;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--r-chico);
+  background: #fff;
+  color: var(--tinta);
+  font: inherit;
+}
+
+.campo textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--accion);
+  box-shadow: 0 0 0 3px rgb(199 64 12 / 0.18);
+}
+
+.campo [aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+.formulario {
+  display: grid;
+  gap: var(--e-4);
+}
+
+.fila {
+  display: grid;
+  gap: var(--e-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+}
+
+.opciones {
+  display: grid;
+  gap: var(--e-2);
+}
+
+.opcion {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-3);
+  padding: var(--e-3) var(--e-4);
+  border: 1.5px solid var(--linea);
+  border-radius: var(--r-medio);
+  background: #fff;
+  cursor: pointer;
+  transition:
+    border-color var(--m-150) var(--entra),
+    background-color var(--m-150) var(--entra);
+}
+
+.opcion:hover {
+  border-color: var(--tinta-suave);
+}
+
+.opcion:has(input:checked) {
+  border-color: var(--accion);
+  background: var(--calida);
+}
+
+.opcion:has(input:focus-visible) {
+  outline: var(--foco);
+  outline-offset: 2px;
+}
+
+.opcion input {
+  margin-top: 0.3rem;
+  accent-color: var(--accion);
+}
+
+.opcion strong {
+  display: block;
+  font-weight: 600;
+}
+
+.opcion span {
+  font-size: var(--t-sec);
+  color: var(--tinta-suave);
+}
+
+/* Avisos y estados ---------------------------------------------------------- */
+
+.aviso {
+  padding: var(--e-3) var(--e-4);
+  border-radius: var(--r-chico);
+  background: var(--aviso-fondo);
+  font-size: var(--t-sec);
+}
+
+.aviso--error {
+  background: var(--error-fondo);
+  color: var(--error);
+}
+
+.aviso--bien {
+  background: var(--bien-fondo);
+  color: var(--bien);
+}
+
+.vacio {
+  display: grid;
+  justify-items: center;
+  gap: var(--e-3);
+  padding: var(--e-7) var(--e-4);
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+.vacio svg {
+  width: 7rem;
+  height: auto;
+}
+
+.cargando {
+  display: grid;
+  place-items: center;
+  min-height: 40vh;
+  color: var(--tinta-suave);
+}
+
+.cargando__sol {
+  width: 3rem;
+  height: 3rem;
+  animation: gira 6s linear infinite;
+}
+
+@keyframes gira {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Etiquetas de estado ------------------------------------------------------- */
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.7rem;
+  border-radius: var(--r-pastilla);
+  background: var(--calida);
+  color: var(--tinta);
+  font-size: var(--t-meta);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.etiqueta--solicitado {
+  background: var(--calida);
+}
+.etiqueta--cotizado {
+  background: var(--amanecer);
+}
+.etiqueta--aprobado,
+.etiqueta--en_compra,
+.etiqueta--liquidado {
+  background: var(--tarjeta-a);
+}
+.etiqueta--en_entrega {
+  background: var(--tarjeta-a);
+}
+.etiqueta--entregado,
+.etiqueta--cerrado {
+  background: var(--fresca);
+  color: var(--bien);
+}
+.etiqueta--cancelado {
+  background: var(--tarjeta-d);
+  color: var(--tinta-suave);
+}
+
+/* Superficies --------------------------------------------------------------- */
+
+.superficie {
+  padding: var(--e-5);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-grande);
+  background: #fff;
+}
+
+.superficie--calida {
+  background: var(--calida);
+  border-color: transparent;
+}
+
+.superficie--fresca {
+  background: var(--fresca);
+  border-color: transparent;
+}
+
+.apilado {
+  display: grid;
+  gap: var(--e-4);
+}
+
+.apilado--grande {
+  gap: var(--e-6);
+}
+
+.apilado--chico {
+  gap: var(--e-2);
+}
+
+.fila-flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.fila-flex--entre {
+  justify-content: space-between;
+}
+
+.separador {
+  height: 1px;
+  border: 0;
+  background: var(--linea);
+  margin: 0;
+}
+
+/* Listas de filas ----------------------------------------------------------- */
+
+.filas {
+  display: grid;
+}
+
+.filas > li,
+.filas > .fila-lista {
+  display: grid;
+  gap: var(--e-1) var(--e-4);
+  padding: var(--e-4) 0;
+  border-top: 1px solid var(--linea);
+}
+
+.filas > li:first-child,
+.filas > .fila-lista:first-child {
+  border-top: 0;
+}
+
+.fila-link {
+  display: grid;
+  gap: var(--e-1);
+  padding: var(--e-4);
+  margin-inline: calc(var(--e-4) * -1);
+  border-radius: var(--r-medio);
+  text-decoration: none;
+  transition: background-color var(--m-150) var(--entra);
+}
+
+.fila-link:hover {
+  background: var(--calida);
+}
+
+/* Detalle clave-valor */
+.datos {
+  display: grid;
+  gap: var(--e-2) var(--e-5);
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: baseline;
+}
+
+.datos dt {
+  font-size: var(--t-sec);
+  color: var(--tinta-suave);
+}
+
+.datos dd {
+  overflow-wrap: anywhere;
+}
+
+/* Tabla ancha: se desplaza sola en pantallas chicas, sin romper la página */
+.tabla-caja {
+  overflow-x: auto;
+  border: 1px solid var(--linea);
+  border-radius: var(--r-medio);
+  background: #fff;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-sec);
+}
+
+.tabla th,
+.tabla td {
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--linea);
+}
+
+.tabla thead th {
+  border-top: 0;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  background: var(--fresca);
+  white-space: nowrap;
+}
+
+.tabla .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Barra de progreso del pedido ---------------------------------------------- */
+
+.camino {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--e-1);
+  counter-reset: paso;
+}
+
+.camino li {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--e-1);
+  padding-top: 1.4rem;
+  font-size: var(--t-meta);
+  line-height: 1.2;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+.camino li::before {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: var(--linea);
+}
+
+.camino li::after {
+  content: "";
+  position: absolute;
+  top: calc(0.2rem + 0.4rem - 1px);
+  left: calc(-50% + 0.5rem);
+  right: calc(50% + 0.5rem);
+  height: 2px;
+  background: var(--linea);
+}
+
+.camino li:first-child::after {
+  display: none;
+}
+
+.camino li[data-listo="true"]::before,
+.camino li[data-listo="true"]::after {
+  background: var(--accion);
+}
+
+.camino li[aria-current="step"] {
+  color: var(--tinta);
+  font-weight: 600;
+}
+
+.camino li[aria-current="step"]::before {
+  box-shadow: 0 0 0 4px rgb(199 64 12 / 0.2);
+}
+
+/* Movimiento reducido ------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+}

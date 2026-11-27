@@ -1,4 +1,5 @@
 import { Logo, MARCA, enlaceWhatsApp } from "@illari/ui";
+import { Bienvenida } from "@/components/Bienvenida";
 import { Cabecera } from "@/components/Cabecera";
 import { Formas } from "@/components/Formas";
 import { Guia } from "@/components/Guia";
@@ -11,6 +12,7 @@ import { MANO } from "@/lib/contenido";
 export default function Pagina() {
   return (
     <>
+      <Bienvenida />
       <Cabecera />
 
       <main id="contenido">

@@ -16,6 +16,14 @@
   --accion: #c7400c; /* único color de acción: mandarina (5,0:1 con texto blanco) */
   --accion-osc: #a33409; /* texto de acento sobre fondos claros (6,6:1) */
   --accion-texto: #ffffff;
+
+  /* Colores del sol, para el logo: disco amarillo, rayos naranja y nombre en degradado
+     del ámbar al naranja profundo (el tramo más claro sigue dando 3,2:1 sobre el fondo). */
+  --sol: #f5b700;
+  --sol-rayo: #e07b00;
+  --logo-a: #de6b05;
+  --logo-b: #c7400c;
+  --logo-c: #a33409;
   --tinta: #14352a; /* texto: verde profundo */
   --tinta-suave: #4b6358; /* texto secundario */
   --linea: rgb(20 53 42 / 0.16);

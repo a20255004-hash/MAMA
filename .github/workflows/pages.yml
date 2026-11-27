@@ -1,4 +1,9 @@
-name: Publicar la web en GitHub Pages
+name: Publicar Illari en GitHub Pages
+
+# Un solo sitio con tres aplicaciones:
+#   /<repositorio>/          página comercial
+#   /<repositorio>/app/      app de clientes
+#   /<repositorio>/central/  Illari Central (panel interno)
 
 on:
   push:
@@ -17,6 +22,8 @@ concurrency:
 jobs:
   construir:
     runs-on: ubuntu-latest
+    env:
+      BASE: /${{ github.event.repository.name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,18 +32,33 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - name: Compilar el sitio estático
-        run: npm run build
+
+      - name: Compilar la página comercial
+        run: npm run build -w @illari/web
         env:
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
-          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
-      - run: touch apps/web/out/.nojekyll
+          NEXT_PUBLIC_BASE_PATH: ${{ env.BASE }}
+      - name: Compilar la app de clientes
+        run: npm run build -w @illari/app
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ env.BASE }}/app
+      - name: Compilar Illari Central
+        run: npm run build -w @illari/admin
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ env.BASE }}/central
+
+      - name: Juntar las tres aplicaciones en un solo sitio
+        run: |
+          mkdir -p _sitio/app _sitio/central
+          cp -r apps/web/out/. _sitio/
+          cp -r apps/app/out/. _sitio/app/
+          cp -r apps/admin/out/. _sitio/central/
+          touch _sitio/.nojekyll
+
       # Requiere activar una vez: Settings > Pages > Source: GitHub Actions.
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/web/out
+          path: _sitio
 
   publicar:
     needs: construir

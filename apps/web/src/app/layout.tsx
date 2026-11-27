@@ -27,10 +27,17 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Si ya viste la bienvenida en esta visita, se oculta antes de pintar la página (sin parpadeo).
+const SCRIPT_BIENVENIDA = `try{if(sessionStorage.getItem("illari:bienvenida")==="1")document.documentElement.dataset.bienvenida="vista"}catch(e){}`;
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-PE" className={`${titulo.variable} ${texto.variable} ${mano.variable}`}>
+    <html lang="es-PE" suppressHydrationWarning className={`${titulo.variable} ${texto.variable} ${mano.variable}`}>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: SCRIPT_BIENVENIDA }} />
+        <noscript>
+          <style>{`.bienvenida{display:none!important}`}</style>
+        </noscript>
         <a className="saltar" href="#contenido">
           Ir al contenido
         </a>

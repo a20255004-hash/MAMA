@@ -1,0 +1,385 @@
+/* Illari — app de clientes. La base común está en @illari/ui/app.css. */
+
+/* Entrada ---------------------------------------------------------------------- */
+
+.acceso {
+  display: grid;
+  min-height: 100dvh;
+}
+
+.acceso__lado {
+  display: none;
+}
+
+.acceso__caja {
+  display: grid;
+  align-content: center;
+  gap: var(--e-4);
+  width: min(100%, 28rem);
+  margin-inline: auto;
+  padding: var(--e-7) var(--margen);
+}
+
+.acceso__logo {
+  font-size: 2.25rem;
+}
+
+.acceso__mano {
+  font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.25rem);
+}
+
+.acceso__pie {
+  display: grid;
+  gap: var(--e-2);
+  justify-items: start;
+  font-size: var(--t-sec);
+  color: var(--tinta-suave);
+}
+
+@media (min-width: 900px) {
+  .acceso {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .acceso__lado {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--amanecer) 0%, var(--calida) 62%, var(--fresca) 100%);
+  }
+
+  .acceso__sol {
+    position: absolute;
+    left: 50%;
+    bottom: -14rem;
+    width: min(46rem, 110%);
+    aspect-ratio: 1;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: var(--sol);
+    opacity: 0.9;
+  }
+
+  .acceso__illa {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: min(24rem, 70%);
+    height: auto;
+    transform: translateX(-50%);
+  }
+
+  .acceso__caja {
+    width: min(100%, 30rem);
+  }
+}
+
+/* Marco --------------------------------------------------------------------- */
+
+.marco {
+  min-height: 100dvh;
+}
+
+.marco__barra {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--fondo);
+  border-bottom: 1px solid var(--linea);
+}
+
+.marco__barra-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-4);
+  width: min(100%, 52rem);
+  min-height: var(--barra);
+  margin-inline: auto;
+  padding: 0 var(--margen);
+}
+
+.marco__logo {
+  font-size: 1.75rem;
+  text-decoration: none;
+}
+
+.marco__yo {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--tarjeta-c);
+  color: var(--tinta);
+  font-family: var(--f-titulo);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.marco__nav-alto {
+  display: none;
+}
+
+.marco__contenido {
+  width: min(100%, 44rem);
+  margin-inline: auto;
+  padding: var(--e-6) var(--margen) calc(var(--nav-inferior) + var(--e-7) + env(safe-area-inset-bottom));
+}
+
+.marco__nav-bajo {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--fondo);
+  border-top: 1px solid var(--linea);
+}
+
+.marco__nav-bajo a {
+  display: grid;
+  justify-items: center;
+  gap: 0.15rem;
+  padding: 0.6rem 0.25rem 0.5rem;
+  min-height: var(--nav-inferior);
+  font-size: var(--t-meta);
+  font-weight: 600;
+  color: var(--tinta-suave);
+  text-decoration: none;
+}
+
+.marco__nav-bajo a[aria-current="page"] {
+  color: var(--accion-osc);
+}
+
+@media (min-width: 720px) {
+  .marco__nav-bajo {
+    display: none;
+  }
+
+  .marco__nav-alto {
+    display: flex;
+    gap: var(--e-2);
+  }
+
+  .marco__nav-alto a {
+    padding: 0.4rem 1rem;
+    border-radius: var(--r-pastilla);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--tinta-suave);
+  }
+
+  .marco__nav-alto a:hover {
+    background: var(--calida);
+  }
+
+  .marco__nav-alto a[aria-current="page"] {
+    background: var(--tarjeta-c);
+    color: var(--tinta);
+  }
+
+  .marco__contenido {
+    padding-bottom: var(--e-8);
+  }
+}
+
+/* Inicio -------------------------------------------------------------------- */
+
+.saludo {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--e-4);
+}
+
+.avatar-illa {
+  width: 5.5rem;
+  height: 5.5rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--amanecer);
+}
+
+.avatar-illa svg {
+  width: 112%;
+  height: auto;
+  margin: 0.55rem 0 0 -6%;
+}
+
+.saludo__mano {
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+}
+
+.pedido-fila {
+  display: grid;
+  gap: var(--e-1);
+}
+
+.pedido-fila__arriba {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
+}
+
+.pedido-fila__titulo {
+  font-family: var(--f-titulo);
+  font-weight: 600;
+  font-size: var(--t-lg);
+}
+
+/* Nuevo pedido ------------------------------------------------------------------- */
+
+.progreso {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e-2);
+}
+
+.progreso span {
+  height: 0.3rem;
+  border-radius: var(--r-pastilla);
+  background: var(--linea);
+}
+
+.progreso span[data-listo="true"] {
+  background: var(--accion);
+}
+
+.producto-buscador {
+  display: grid;
+  gap: var(--e-2);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+}
+
+.chip {
+  min-height: 2.5rem;
+  padding: 0.35rem 0.95rem;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--r-pastilla);
+  background: #fff;
+  color: var(--tinta);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color var(--m-150) var(--entra),
+    background-color var(--m-150) var(--entra);
+}
+
+.chip:hover {
+  border-color: var(--tinta-suave);
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--accion);
+  background: var(--calida);
+}
+
+.item-fila {
+  display: grid;
+  gap: var(--e-3);
+  padding: var(--e-4);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-medio);
+  background: #fff;
+}
+
+.item-fila__arriba {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--e-3);
+}
+
+.item-fila__nombre {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.contador {
+  display: inline-grid;
+  grid-template-columns: 2.75rem minmax(3.5rem, 5rem) 2.75rem;
+  align-items: stretch;
+}
+
+.contador button {
+  border: 1.5px solid var(--linea);
+  background: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.contador button:first-child {
+  border-radius: var(--r-chico) 0 0 var(--r-chico);
+}
+
+.contador button:last-child {
+  border-radius: 0 var(--r-chico) var(--r-chico) 0;
+}
+
+.contador input {
+  min-height: 2.75rem;
+  border: 1.5px solid var(--linea);
+  border-inline: 0;
+  text-align: center;
+  font: inherit;
+  background: #fff;
+  min-width: 0;
+}
+
+.resumen {
+  display: grid;
+  gap: var(--e-2);
+}
+
+.resumen li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--e-3);
+}
+
+/* Detalle del pedido ----------------------------------------------------------- */
+
+.cotizacion__total {
+  font-family: var(--f-titulo);
+  font-weight: 600;
+  font-size: var(--t-xl);
+}
+
+.totales {
+  display: grid;
+  gap: var(--e-2);
+}
+
+.totales > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--e-4);
+}
+
+.totales > div:last-child {
+  padding-top: var(--e-2);
+  border-top: 1px solid var(--linea);
+  font-weight: 600;
+}
+
+.item-linea {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e-4);
+}
+
+.item-linea__der {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
