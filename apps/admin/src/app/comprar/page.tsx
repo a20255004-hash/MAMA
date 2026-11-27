@@ -4,11 +4,15 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import {
   cantidad as formatoCantidad,
+  cuentaDeHogar,
   mensajeDeError,
+  NOMBRE_SUSTITUCION,
   pedidosParaComprar,
   registrarCompra,
   soles,
+  type CaseroHogar,
   type EstadoItem,
+  type PreferenciaHogar,
   type Item,
   type PedidoParaComprar,
 } from "@illari/db";
@@ -171,9 +175,15 @@ export default function Comprar() {
   const [pedidos, setPedidos] = useState<PedidoParaComprar[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const [casas, setCasas] = useState<Record<string, { caseros: CaseroHogar[]; preferencias: PreferenciaHogar[] }>>({});
+
   const cargar = useCallback(async () => {
     try {
-      setPedidos(await pedidosParaComprar());
+      const lista = await pedidosParaComprar();
+      setPedidos(lista);
+      const hogares = [...new Set(lista.map((p) => p.hogar_id))];
+      const cuentas = await Promise.all(hogares.map((h) => cuentaDeHogar(h)));
+      setCasas(Object.fromEntries(hogares.map((h, i) => [h, cuentas[i]!])));
     } catch (e) {
       setError(mensajeDeError(e));
     }
@@ -216,6 +226,23 @@ export default function Comprar() {
                 <span style={{ width: `${items.length ? (hechos / items.length) * 100 : 0}%` }} />
               </div>
               {p.notas_cliente && <p className="aviso">{p.notas_cliente}</p>}
+              {(casas[p.hogar_id]?.preferencias.length ?? 0) + (casas[p.hogar_id]?.caseros.length ?? 0) > 0 && (
+                <details className="aviso">
+                  <summary style={{ cursor: "pointer", fontWeight: 600 }}>Lo que prefiere este hogar</summary>
+                  <ul className="filas">
+                    {casas[p.hogar_id]?.preferencias.map((x) => (
+                      <li key={x.id}>
+                        <strong>{x.producto}</strong> {x.preferencia ? `· ${x.preferencia}` : ""} · si no hay: {NOMBRE_SUSTITUCION[x.sustitucion].toLowerCase()}
+                      </li>
+                    ))}
+                    {casas[p.hogar_id]?.caseros.map((x) => (
+                      <li key={x.id}>
+                        <strong>{x.nombre}</strong> {[x.rubro, x.puesto, x.nota].filter(Boolean).join(" · ")}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
               {items.length === 0 ? (
                 <p className="t-suave">
                   Este pedido no tiene lista.{" "}

@@ -202,6 +202,7 @@ export default function Pagina() {
   const router = useRouter();
   useEffect(() => {
     if (perfil.rol === "compradora") router.replace("/comprar/");
+    if (perfil.rol === "repartidor") router.replace("/entregas/");
   }, [perfil.rol, router]);
   if (perfil.rol !== "administrador") return <Cargando />;
   return (

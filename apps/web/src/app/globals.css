@@ -1381,3 +1381,17 @@ html[data-bienvenida="vista"] .bienvenida {
     opacity: 1;
   }
 }
+
+.pie__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2) var(--e-5);
+  margin-top: var(--e-4);
+  font-size: var(--t-sec);
+  font-weight: 600;
+}
+
+.pie__legal a {
+  color: var(--accion-osc);
+  text-underline-offset: 3px;
+}

@@ -13,8 +13,8 @@ export function SoloAdmin({ children }: { children: ReactNode }) {
       <h1 className="t-seccion" style={{ color: "var(--tinta)" }}>
         Esta sección es solo para administración
       </h1>
-      <Link href="/comprar/" className="boton boton--accion">
-        Ir a Comprar
+      <Link href={perfil.rol === "repartidor" ? "/entregas/" : "/comprar/"} className="boton boton--accion">
+        {perfil.rol === "repartidor" ? "Ir a Entregas" : "Ir a Comprar"}
       </Link>
     </div>
   );

@@ -5,7 +5,8 @@
 1. **Web comercial y cimientos** — construida (cinematográfica 3D) y publicada, con bienvenida cálida al entrar.
 2. **Base de datos** — Supabase "Illari" creada y con las migraciones 0001 a 0004 aplicadas (ver abajo).
 3. **App de clientes y Illari Central (panel)** — primera versión construida; falta probarlas con personas reales (ver "Qué está probado").
-4. **Reportes, entregas, personal, PWA instalable y varias ciudades** — pendiente.
+4. **Entregas, paquetes, caseros, Libro de Reclamaciones, privacidad y app instalable** — construidos en la segunda tanda (migración 0005).
+5. **Reportes, gráficos, varias ciudades y textos legales finales** — pendiente.
 
 ## Qué hay
 
@@ -13,6 +14,7 @@
 - **Web:** escenas 3D, carrusel, pasos, Illa como guía, formulario que guarda la solicitud y abre WhatsApp, bienvenida (saludo según la hora, una vez por visita), logo con colores del sol.
 - **App de clientes (`/app`):** crear cuenta y entrar, "Mi casa" (datos y direcciones), hacer un pedido en tres pasos (lista propia, compra delegada o caseros), ver el estado, aprobar la cotización y cancelar mientras no se compra.
 - **Illari Central (`/central`):** solo para el equipo. *Hoy* (solicitudes de la web y pedidos en marcha), *Pedidos* (precios, cotización con versiones, avance de estado, notas, cuentas del pedido), *Comprar* (modo compras para el celular, con reglas de sustitución), *Caja* (dos cuentas separadas: dinero de clientes y negocio), *Reclamos* (Libro de Reclamaciones con plazo), *Equipo* (roles) y *Catálogo*.
+- **Segunda tanda:** *Entregas* (programar quién y cuándo, la repartidora marca "salí" y "entregado" desde su celular y el pedido se actualiza solo), *Paquetes* (crear, editar y publicar; aparecen en la web y en la app), *Mi casa* con preferencias de compra y caseros de confianza (la compradora los ve al comprar), Libro de Reclamaciones y Privacidad en la web (`/reclamaciones/`, `/privacidad/`, enlazados en el pie), y app/panel instalables en el celular (manifiesto, íconos del sol y modo sin conexión que solo guarda la carcasa, nunca datos de pedidos).
 - **Base de datos:** seguridad por filas en todas las tablas, funciones que validan quién actúa y en qué estado está el pedido, libro de caja que no permite mezclar dinero de clientes con ingresos del negocio, y plazo de 15 días hábiles en los reclamos.
 
 ## Qué está probado
@@ -39,13 +41,11 @@
 
 ## Todavía no existe (se hará por fases)
 
-- Entregas: asignar repartidor, ventana horaria y confirmar entrega (la tabla ya existe; falta la pantalla).
-- Paquetes y combos: administrar y publicar desde el panel (hoy la web no muestra ninguno publicado).
-- Cajas por compradora, reportes y gráficos, varias ciudades.
-- Caseros de confianza y preferencias del hogar en la app (las tablas existen; falta la pantalla).
-- App instalable en el celular (PWA: íconos y modo sin conexión).
-- Libro de Reclamaciones visible en la web, términos y condiciones, política de privacidad, cookies y secciones nuevas (Quiénes somos, Compromisos, Dónde llegamos, Preguntas frecuentes) — necesitan los datos legales de abajo.
+- Reportes y gráficos (ventas, ganancia por mes, clientes frecuentes) y cajas por compradora.
+- Varias ciudades: la base ya está preparada (todo lleva `ciudad_id`), falta la pantalla para abrir una ciudad nueva.
 - Desactivar a una persona del equipo (hoy solo se cambia su rol).
+- Términos y condiciones, y las secciones nuevas de la web (Quiénes somos, Compromisos, Dónde llegamos, Preguntas frecuentes): necesitan tu aprobación y tus datos legales.
+- Enviar correos desde el sistema (copia de la respuesta a un reclamo, avisos): requiere un servicio de correo propio.
 
 ## Decisiones pendientes de la dueña
 
@@ -58,4 +58,5 @@
 - Consultar "Illari" en el buscador de marcas de INDECOPI antes de registrarla.
 - Paquetes reales: nombres y contenido.
 - Modelo de cobro del servicio (solo para el panel; no se publica).
-- Confirmar con un asesor legal el cumplimiento del Libro de Reclamaciones (plazos y datos obligatorios).
+- Confirmar con un asesor legal el Libro de Reclamaciones (plazo de 15 días hábiles, datos obligatorios y la entrega de copia al consumidor) y revisar la página de Privacidad.
+- Completar `apps/web/src/lib/empresa.ts` con los datos legales; mientras estén vacíos no se muestran.

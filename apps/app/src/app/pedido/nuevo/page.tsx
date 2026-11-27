@@ -13,10 +13,12 @@ import {
   direccionesDe,
   mensajeDeError,
   NOMBRE_MODALIDAD,
+  paquetesPublicados,
   type Categoria,
   type Direccion,
   type ItemNuevo,
   type Modalidad,
+  type Paquete,
   type Producto,
   type Recepcion,
   type Sustitucion,
@@ -62,12 +64,15 @@ export default function NuevoPedido() {
   const [listo, setListo] = useState<{ id: string; numero: number } | null>(null);
   const [nuevaDir, setNuevaDir] = useState({ etiqueta: "Casa", direccion: "", referencia: "", zona: "" });
   const [agregandoDir, setAgregandoDir] = useState(false);
+  const [paquetes, setPaquetes] = useState<Paquete[]>([]);
+  const [paqueteId, setPaqueteId] = useState("");
 
   useEffect(() => {
     let vivo = true;
-    Promise.all([catalogo(), direccionesDe(hogar.id)])
-      .then(([c, d]) => {
+    Promise.all([catalogo(), direccionesDe(hogar.id), paquetesPublicados().catch(() => [] as Paquete[])])
+      .then(([c, d, pq]) => {
         if (!vivo) return;
+        setPaquetes(pq);
         setCat(c);
         setDirecciones(d);
         if (d[0]) setDireccionId(d[0].id);
@@ -79,8 +84,20 @@ export default function NuevoPedido() {
     };
   }, [hogar.id]);
 
-  // "Paquete o combo" se suma aquí cuando haya paquetes publicados y su selector.
-  const modalidades: Modalidad[] = ["lista", "delegada", "caseros"];
+  // "Paquete o combo" aparece solo cuando hay paquetes publicados.
+  const modalidades: Modalidad[] = paquetes.length > 0 ? ["paquete", "lista", "delegada", "caseros"] : ["lista", "delegada", "caseros"];
+  const paquete = paquetes.find((x) => x.id === paqueteId) ?? null;
+  // Cada línea del paquete se vuelve un producto; la administración los ajusta y les pone precio.
+  const itemsEnvio: ItemEnEdicion[] =
+    modalidad === "paquete" && paquete
+      ? paquete.contenido.map((linea, i) => ({
+          clave: `paq-${i}`,
+          descripcion: linea.slice(0, 160),
+          cantidad: 1,
+          unidad: "según paquete",
+          sustitucion: "consultar" as Sustitucion,
+        }))
+      : items;
 
   const productosVisibles = useMemo(
     () => (cat?.productos ?? []).filter((p) => p.categoria_id === categoriaActiva),
@@ -115,7 +132,9 @@ export default function NuevoPedido() {
 
   function validarPaso(): string | null {
     if (paso === 0 && !modalidad) return "Elige cómo quieres comprar.";
-    if (paso === 1) {
+    if (paso === 1 && modalidad === "paquete") {
+      if (!paquete) return "Elige un paquete.";
+    } else if (paso === 1) {
       if (modalidad === "delegada") {
         if (items.length === 0 && notas.trim().length < 5) return "Cuéntanos qué necesitas, aunque sea con pocas palabras.";
       } else if (items.length === 0) return "Agrega al menos un producto.";
@@ -163,8 +182,8 @@ export default function NuevoPedido() {
         recepcion,
         direccionId: direccionId || null,
         fechaDeseada: fecha || null,
-        notas: notas.trim(),
-        items: items.map(({ clave: _clave, ...i }) => i),
+        notas: (modalidad === "paquete" && paquete ? `Paquete elegido: ${paquete.nombre}.${notas.trim() ? `\n${notas.trim()}` : ""}` : notas.trim()).slice(0, 1200),
+        items: itemsEnvio.map(({ clave: _clave, ...i }) => i),
       });
       setListo({ id: pedido.id, numero: pedido.numero });
     } catch (e) {
@@ -237,7 +256,29 @@ export default function NuevoPedido() {
             </fieldset>
           )}
 
-          {paso === 1 && (
+          {paso === 1 && modalidad === "paquete" && (
+            <fieldset className="apilado">
+              <legend className="t-pagina" style={{ marginBottom: "var(--e-4)" }}>
+                Elige tu paquete
+              </legend>
+              <div className="opciones">
+                {paquetes.map((x) => (
+                  <label key={x.id} className="opcion">
+                    <input type="radio" name="paquete" value={x.id} checked={paqueteId === x.id} onChange={() => setPaqueteId(x.id)} />
+                    <span>
+                      <strong>{x.nombre}</strong>
+                      {x.paraQuien && <span>{x.paraQuien}</span>}
+                      {x.descripcion && <span>{x.descripcion}</span>}
+                      {x.contenido.length > 0 && <span>Trae: {x.contenido.join(", ")}.</span>}
+                    </span>
+                  </label>
+                ))}
+              </div>
+              <p className="t-meta">Si quieres cambiar algo, cuéntanoslo en el último paso.</p>
+            </fieldset>
+          )}
+
+          {paso === 1 && modalidad !== "paquete" && (
             <div className="apilado apilado--grande">
               <h1 className="t-pagina">{modalidad === "delegada" ? "Cuéntanos qué necesitas" : "¿Qué te traemos?"}</h1>
 
@@ -465,14 +506,12 @@ export default function NuevoPedido() {
               <section className="superficie superficie--calida apilado apilado--chico" aria-label="Resumen">
                 <h2 className="t-seccion">Tu pedido</h2>
                 <p className="t-suave">{modalidad ? NOMBRE_MODALIDAD[modalidad] : ""}</p>
-                {items.length > 0 ? (
+                {itemsEnvio.length > 0 ? (
                   <ul className="resumen">
-                    {items.map((i) => (
+                    {itemsEnvio.map((i) => (
                       <li key={i.clave}>
                         <span>{i.descripcion}</span>
-                        <span className="t-num">
-                          {formatoCantidad(i.cantidad)} {i.unidad}
-                        </span>
+                        <span className="t-num">{i.unidad === "según paquete" ? "" : `${formatoCantidad(i.cantidad)} ${i.unidad}`}</span>
                       </li>
                     ))}
                   </ul>

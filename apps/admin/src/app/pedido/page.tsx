@@ -11,7 +11,18 @@ import {
   cancelarPedidoCentral,
   cantidad as formatoCantidad,
   catalogoCompleto,
+  cuentaDeHogar,
+  entregaDePedido,
   enviarCotizacion,
+  marcarEntrega,
+  NOMBRE_ENTREGA,
+  NOMBRE_SUSTITUCION,
+  programarEntrega,
+  repartidores,
+  type CaseroHogar,
+  type Entrega,
+  type Perfil,
+  type PreferenciaHogar,
   fechaCorta,
   fechaHora,
   guardarItem,
@@ -107,6 +118,10 @@ function Detalle() {
   const [nota, setNota] = useState("");
   const [confirmar, setConfirmar] = useState<"cancelar" | "aprobar" | null>(null);
   const [mov, setMov] = useState({ tipo: "adelanto_cliente" as TipoMovimiento, monto: "", fecha: hoy(), descripcion: "" });
+  const [entrega, setEntrega] = useState<Entrega | null>(null);
+  const [reps, setReps] = useState<Perfil[]>([]);
+  const [casa, setCasa] = useState<{ caseros: CaseroHogar[]; preferencias: PreferenciaHogar[] } | null>(null);
+  const [formEntrega, setFormEntrega] = useState({ repartidorId: "", ventana: "" });
 
   const cargar = useCallback(async () => {
     if (!id) return setD(null);
@@ -122,6 +137,15 @@ function Detalle() {
           setDelivery(String(ultima.tarifa_delivery));
           setTolerancia(String(ultima.tolerancia_pct));
         }
+        const [en, rs, ca] = await Promise.all([
+          entregaDePedido(id),
+          repartidores(),
+          completo.hogar ? cuentaDeHogar(completo.hogar.id) : Promise.resolve(null),
+        ]);
+        setEntrega(en);
+        setReps(rs);
+        setCasa(ca);
+        setFormEntrega({ repartidorId: en?.repartidor_id ?? "", ventana: en?.ventana ?? "" });
       }
     } catch (e) {
       setError(mensajeDeError(e));
@@ -508,6 +532,70 @@ function Detalle() {
             </section>
           )}
 
+          {/* Entrega ------------------------------------------------------------------- */}
+          {pedido.recepcion === "domicilio" && ["liquidado", "en_entrega", "entregado"].includes(pedido.estado) && (
+            <section className="panel apilado" aria-labelledby="h-ent">
+              <h2 id="h-ent" className="t-titulo">
+                Entrega a domicilio
+              </h2>
+              {entrega && (
+                <p className="aviso">
+                  {NOMBRE_ENTREGA[entrega.estado]}
+                  {entrega.entregada_en ? ` el ${fechaHora(entrega.entregada_en)}` : ""}
+                  {entrega.nota ? ` · ${entrega.nota}` : ""}
+                </p>
+              )}
+              <div className="fila">
+                <div className="campo">
+                  <label htmlFor="rep">Quién entrega</label>
+                  <select id="rep" value={formEntrega.repartidorId} onChange={(e) => setFormEntrega({ ...formEntrega, repartidorId: e.target.value })}>
+                    <option value="">Sin asignar</option>
+                    {reps.map((r) => (
+                      <option key={r.id} value={r.id}>
+                        {r.nombre || "Sin nombre"}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="campo">
+                  <label htmlFor="vent">Horario</label>
+                  <input id="vent" value={formEntrega.ventana} maxLength={80} onChange={(e) => setFormEntrega({ ...formEntrega, ventana: e.target.value })} placeholder="Ej.: mañana de 9 a 11" />
+                </div>
+              </div>
+              {reps.length === 0 && (
+                <p className="t-meta">
+                  Aún no hay repartidores. Dale ese rol a alguien desde{" "}
+                  <Link className="enlace" href="/equipo/">
+                    Equipo
+                  </Link>
+                  ; mientras tanto puedes entregar tú y marcar el pedido como entregado.
+                </p>
+              )}
+              <div className="fila-flex">
+                <button
+                  type="button"
+                  className="boton boton--suave"
+                  disabled={ocupado}
+                  onClick={() => void correr(() => programarEntrega(pedido.id, formEntrega.repartidorId || null, formEntrega.ventana.trim()), "Entrega guardada.")}
+                >
+                  Guardar entrega
+                </button>
+                {entrega && pedido.estado !== "entregado" && (
+                  <>
+                    {pedido.estado === "liquidado" && (
+                      <button type="button" className="boton boton--accion" disabled={ocupado} onClick={() => void correr(() => marcarEntrega(pedido.id, "en_camino", ""), "Salió a entregar.")}>
+                        Salió a entregar
+                      </button>
+                    )}
+                    <button type="button" className="boton boton--accion" disabled={ocupado} onClick={() => void correr(() => marcarEntrega(pedido.id, "entregada", ""), "Pedido entregado.")}>
+                      Marcar entregada
+                    </button>
+                  </>
+                )}
+              </div>
+            </section>
+          )}
+
           {/* Compra y cuentas ---------------------------------------------------------- */}
           {hayCompra && (
             <section className="panel apilado" aria-labelledby="h-cuentas">
@@ -741,6 +829,40 @@ function Detalle() {
               </a>
             )}
           </section>
+
+          {casa && (casa.caseros.length > 0 || casa.preferencias.length > 0) && (
+            <section className="panel apilado" aria-labelledby="h-pref">
+              <h2 id="h-pref" className="t-titulo">
+                Lo que prefiere este hogar
+              </h2>
+              {casa.preferencias.length > 0 && (
+                <ul className="filas">
+                  {casa.preferencias.map((p) => (
+                    <li key={p.id}>
+                      <strong>{p.producto}</strong>
+                      <span className="t-suave">
+                        {p.preferencia ? `${p.preferencia} · ` : ""}
+                        Si no hay: {NOMBRE_SUSTITUCION[p.sustitucion].toLowerCase()}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {casa.caseros.length > 0 && (
+                <div className="apilado apilado--chico">
+                  <h3 className="t-seccion">Sus caseros de confianza</h3>
+                  <ul className="filas">
+                    {casa.caseros.map((c) => (
+                      <li key={c.id}>
+                        <strong>{c.nombre}</strong>
+                        <span className="t-suave">{[c.rubro, c.puesto, c.nota].filter(Boolean).join(" · ")}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
+          )}
 
           {cotizaciones.length > 0 && (
             <section className="panel apilado apilado--chico" aria-labelledby="h-hist">

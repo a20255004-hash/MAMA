@@ -105,3 +105,16 @@ export const ENTRADA_DE: Record<TipoMovimiento, boolean | null> = {
 export function enlaceCorreo(correo: string, asunto: string): string {
   return `mailto:${correo}?subject=${encodeURIComponent(asunto)}`;
 }
+
+export const NOMBRE_ENTREGA = {
+  pendiente: "Por salir",
+  en_camino: "En camino",
+  entregada: "Entregada",
+  fallida: "No se pudo entregar",
+} as const;
+
+export const NOMBRE_SUSTITUCION = {
+  consultar: "Consultarme antes",
+  similar: "Cambiar por algo similar",
+  omitir: "Mejor no llevarlo",
+} as const;

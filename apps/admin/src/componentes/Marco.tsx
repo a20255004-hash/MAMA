@@ -13,7 +13,9 @@ const ENLACES: Enlace[] = [
   { href: "/", texto: "Hoy", roles: ["administrador"] },
   { href: "/pedidos/", texto: "Pedidos", roles: ["administrador"] },
   { href: "/comprar/", texto: "Comprar", roles: ["administrador", "compradora"] },
+  { href: "/entregas/", texto: "Entregas", roles: ["administrador", "repartidor"] },
   { href: "/caja/", texto: "Caja", roles: ["administrador"] },
+  { href: "/paquetes/", texto: "Paquetes", roles: ["administrador"] },
   { href: "/reclamos/", texto: "Reclamos", roles: ["administrador"] },
   { href: "/equipo/", texto: "Equipo", roles: ["administrador"] },
   { href: "/catalogo/", texto: "Catálogo", roles: ["administrador"] },
@@ -54,16 +56,7 @@ export function Marco({ children }: { children: ReactNode }) {
       </aside>
 
       <main className="central__contenido" id="contenido">
-        {perfil.rol === "repartidor" ? (
-          <div className="vacio">
-            <h1 className="t-seccion" style={{ color: "var(--tinta)" }}>
-              Tu vista de entregas llega pronto
-            </h1>
-            <p>Por ahora te avisamos por WhatsApp qué entregar y a quién.</p>
-          </div>
-        ) : (
-          children
-        )}
+        {children}
       </main>
     </div>
   );

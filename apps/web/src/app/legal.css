@@ -1,0 +1,227 @@
+/* Páginas legales: Libro de Reclamaciones y privacidad. Claras, sobrias y fáciles de leer. */
+
+.legal {
+  min-height: 100dvh;
+  background: var(--fondo);
+}
+
+.legal__barra {
+  border-bottom: 1px solid var(--linea);
+}
+
+.legal__barra-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-4);
+  width: min(100%, 52rem);
+  min-height: 4rem;
+  margin-inline: auto;
+  padding: 0 var(--margen);
+}
+
+.legal__logo {
+  font-size: 1.75rem;
+  text-decoration: none;
+}
+
+.legal__volver {
+  font-weight: 600;
+  color: var(--accion-osc);
+  text-underline-offset: 3px;
+}
+
+.legal__cuerpo {
+  display: grid;
+  gap: var(--e-6);
+  width: min(100%, 44rem);
+  margin-inline: auto;
+  padding: var(--e-7) var(--margen) var(--e-9);
+}
+
+.legal h1,
+.legal h2 {
+  font-family: var(--f-titulo);
+  font-weight: var(--peso-titulo);
+  line-height: var(--alto-titulo);
+  letter-spacing: var(--apretado);
+  text-wrap: balance;
+}
+
+.legal h1 {
+  font-size: var(--t-2xl);
+}
+
+.legal h2 {
+  font-size: var(--t-xl);
+  margin-bottom: var(--e-3);
+}
+
+.legal p,
+.legal li {
+  max-width: 40rem;
+}
+
+.legal__texto {
+  display: grid;
+  gap: var(--e-3);
+}
+
+.legal__texto ul {
+  display: grid;
+  gap: var(--e-2);
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.legal__nota {
+  padding: var(--e-4);
+  border-radius: var(--r-medio);
+  background: var(--calida);
+  font-size: var(--t-sec);
+}
+
+.legal__datos {
+  display: grid;
+  gap: var(--e-2) var(--e-5);
+  grid-template-columns: max-content minmax(0, 1fr);
+}
+
+.legal__datos dt {
+  color: var(--tinta-suave);
+  font-size: var(--t-sec);
+}
+
+.legal__datos dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Formulario */
+.hoja {
+  display: grid;
+  gap: var(--e-5);
+}
+
+.hoja fieldset {
+  display: grid;
+  gap: var(--e-3);
+  padding: var(--e-5);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-grande);
+  background: #fff;
+}
+
+.hoja legend {
+  padding: 0 var(--e-2);
+  font-family: var(--f-titulo);
+  font-weight: var(--peso-titulo);
+  font-size: var(--t-lg);
+}
+
+.hoja__fila {
+  display: grid;
+  gap: var(--e-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+
+.hoja__campo {
+  display: grid;
+  gap: var(--e-1);
+  min-width: 0;
+}
+
+.hoja__campo label,
+.hoja__campo .hoja__titulo {
+  font-weight: 600;
+  font-size: var(--t-sec);
+}
+
+.hoja__campo input,
+.hoja__campo select,
+.hoja__campo textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.6rem 0.9rem;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--r-chico);
+  background: #fff;
+  color: var(--tinta);
+  font: inherit;
+}
+
+.hoja__campo textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.hoja__campo input:focus,
+.hoja__campo select:focus,
+.hoja__campo textarea:focus {
+  outline: none;
+  border-color: var(--accion);
+  box-shadow: 0 0 0 3px rgb(199 64 12 / 0.18);
+}
+
+.hoja__ayuda {
+  font-size: var(--t-meta);
+  color: var(--tinta-suave);
+}
+
+.hoja__error {
+  padding: var(--e-3) var(--e-4);
+  border-radius: var(--r-chico);
+  background: #fdecea;
+  color: #b42318;
+  font-size: var(--t-sec);
+}
+
+.hoja__opcion {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-3);
+  padding: var(--e-3) var(--e-4);
+  border: 1.5px solid var(--linea);
+  border-radius: var(--r-medio);
+  cursor: pointer;
+}
+
+.hoja__opcion:has(input:checked) {
+  border-color: var(--accion);
+  background: var(--calida);
+}
+
+.hoja__opcion input {
+  margin-top: 0.3rem;
+  accent-color: var(--accion);
+}
+
+.hoja__opcion strong {
+  display: block;
+}
+
+.hoja__opcion span {
+  font-size: var(--t-sec);
+  color: var(--tinta-suave);
+}
+
+.legal .boton {
+  justify-self: start;
+}
+
+.resumen-hoja {
+  display: grid;
+  gap: var(--e-3);
+  padding: var(--e-5);
+  border: 1px solid var(--linea);
+  border-radius: var(--r-grande);
+  background: #fff;
+}
+
+@media print {
+  .legal__barra,
+  .legal .boton,
+  .saltar {
+    display: none !important;
+  }
+}

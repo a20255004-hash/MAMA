@@ -39,6 +39,10 @@ export default function Pagina() {
           {MARCA.nombre} significa amanecer en quechua. Así queremos que empiece tu día: con tu mercado ya hecho.
         </p>
         <p className="pie__firma">{MANO.cierre}</p>
+        <nav className="pie__legal" aria-label="Información legal">
+          <a href="reclamaciones/">Libro de Reclamaciones</a>
+          <a href="privacidad/">Privacidad y cookies</a>
+        </nav>
         <div className="pie__fila">
           <p>
             {MARCA.mercado}, {MARCA.ciudad}, Perú

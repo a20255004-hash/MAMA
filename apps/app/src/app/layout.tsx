@@ -3,6 +3,7 @@ import { Caveat, Figtree, Fredoka } from "next/font/google";
 import "@illari/ui/tokens.css";
 import "@illari/ui/app.css";
 import "./app.css";
+import { RegistrarSW } from "@/componentes/RegistrarSW";
 import { Compuerta, ProveedorSesion } from "@/componentes/Sesion";
 
 const titulo = Fredoka({ subsets: ["latin"], variable: "--font-titulo", display: "swap" });
@@ -21,10 +22,20 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-PE" className={`${titulo.variable} ${texto.variable} ${mano.variable}`}>
+      <head>
+        <link rel="manifest" href={`${BASE}/manifest.webmanifest`} />
+        <link rel="apple-touch-icon" href={`${BASE}/icons/apple-touch-icon.png`} />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-title" content="Illari" />
+      </head>
       <body>
+        <RegistrarSW />
         <ProveedorSesion>
           <Compuerta>{children}</Compuerta>
         </ProveedorSesion>
