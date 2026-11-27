@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Modalidad } from "@illari/db";
-import { Illa } from "@illari/ui";
 import { AYUDA, GUIA, MODALIDADES } from "@/lib/contenido";
 import { reproducir } from "@/lib/sonido";
 import { EVENTO_MODALIDAD } from "./Formas";
+import { IllaViva } from "./IllaViva";
 
 const CLAVE = "illari:guia-callada";
 const SEGUNDOS_VISIBLE = 7;
@@ -157,7 +157,7 @@ export function Guia() {
         aria-expanded={abierto}
         aria-label={abierto ? "Ocultar lo que dice Illa" : "Hablar con Illa"}
       >
-        <Illa key={abierto ? seccion : "quieta"} gesto="saluda" />
+        <IllaViva gesto="saluda" arrastrable={false} />
       </button>
     </aside>
   );

@@ -1,11 +1,16 @@
 import { Logo, MARCA, enlaceWhatsApp } from "@illari/ui";
 import { Bienvenida } from "@/components/Bienvenida";
 import { Cabecera } from "@/components/Cabecera";
+import { CintaGigante } from "@/components/CintaGigante";
+import { Efectos } from "@/components/Efectos";
 import { Formas } from "@/components/Formas";
 import { Guia } from "@/components/Guia";
+import { HoyTeTraemos } from "@/components/HoyTeTraemos";
 import { Historia } from "@/components/Historia";
+import { Manifiesto } from "@/components/Manifiesto";
 import { Pasos } from "@/components/Pasos";
 import { Pedir } from "@/components/Pedir";
+import { ProgresoScroll } from "@/components/ProgresoScroll";
 import { Quien } from "@/components/Quien";
 import { MANO } from "@/lib/contenido";
 
@@ -13,22 +18,18 @@ export default function Pagina() {
   return (
     <>
       <Bienvenida />
+      <ProgresoScroll />
+      <Efectos />
       <Cabecera />
 
       <main id="contenido">
         <Historia />
 
-        <section className="manifiesto">
-          <h2 className="titulo-2">Sabemos lo que es correr todo el día.</h2>
-          <p className="bajada">
-            Levantarte de madrugada, caminar entre puestos, comparar, regatear y volver cargando las bolsas. Y recién
-            ahí empieza tu día. Si trabajas, estudias o tienes hijos, esas horas valen oro. Déjanos esa parte a
-            nosotras.
-          </p>
-        </section>
-
+        <Manifiesto />
+        <HoyTeTraemos />
         <Formas />
         <Pasos />
+        <CintaGigante />
         <Quien />
         <Pedir />
       </main>

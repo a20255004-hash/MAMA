@@ -8,10 +8,11 @@ import {
   type Modalidad,
   type Paquete,
 } from "@illari/db";
-import { Illa, MARCA, enlaceWhatsApp } from "@illari/ui";
+import { MARCA, enlaceWhatsApp } from "@illari/ui";
 import { MODALIDADES, RECEPCIONES } from "@/lib/contenido";
 import { reproducir } from "@/lib/sonido";
 import { EVENTO_MODALIDAD } from "./Formas";
+import { IllaViva } from "./IllaViva";
 
 type Estado =
   | { fase: "inicial" }
@@ -94,7 +95,7 @@ export function Pedir() {
 
       {estado.fase === "enviada" ? (
         <div className="pedir__listo" role="status">
-          <Illa gesto="celebra" className="pedir__illa" />
+          <IllaViva gesto="celebra" className="pedir__illa" />
           <div>
             <h3 className="mano-titulo">¡Listo, {estado.nombre}! Ya casi.</h3>
             <p>Se abrió WhatsApp con tu pedido escrito. Dale a enviar y conversamos. Si no se abrió, ábrelo aquí.</p>

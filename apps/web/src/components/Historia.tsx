@@ -4,6 +4,7 @@ import { Suspense, useRef } from "react";
 import { motion, transform, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { MARCA, enlaceWhatsApp } from "@illari/ui";
 import { Cosecha } from "@/tres/Cosecha";
+import { Escribiendo } from "./Escribiendo";
 import { reproducir } from "@/lib/sonido";
 import { usePrecargarFrutas } from "@/tres/Frutos";
 import { Lienzo } from "@/tres/Lienzo";
@@ -49,10 +50,13 @@ export function Historia() {
 
         <motion.div className="acto acto--uno" style={{ opacity: opacidad1, pointerEvents: toca1 }}>
           <h1 className="acto__titulo">Duerme un ratito más. Hoy vamos al mercado por ti.</h1>
-          <p className="acto__texto">
-            Escogemos tu fruta, tu verdura y tu pollo en el {MARCA.mercado} como si fueran para nuestra propia mesa,
-            y te los llevamos a casa.
-          </p>
+          <Escribiendo
+            como="p"
+            className="acto__texto"
+            texto={`Escogemos tu fruta, tu verdura y tu pollo en el ${MARCA.mercado} como si fueran para nuestra propia mesa, y te los llevamos a casa.`}
+            velocidad={20}
+            retraso={900}
+          />
           <div className="acto__acciones">
             <a className="boton boton--accion" href="#pedir">
               Quiero mi compra

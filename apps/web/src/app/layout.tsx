@@ -3,6 +3,7 @@ import { Caveat, Figtree, Fredoka } from "next/font/google";
 import { MARCA } from "@illari/ui";
 import "@illari/ui/tokens.css";
 import "./globals.css";
+import "./efectos.css";
 
 // Letras elegidas por la dueña: Fredoka para títulos, Figtree para texto y Caveat como toque a mano.
 const titulo = Fredoka({ subsets: ["latin"], variable: "--font-titulo", display: "swap" });

@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { Illa } from "@illari/ui";
 import { CINTA, CRITERIOS, MANO } from "@/lib/contenido";
+import { IllaViva } from "./IllaViva";
 
 /** Quién compra: el criterio de una mamá, con Illa y la cinta de lo que se consigue en el mercado. */
 export function Quien() {
@@ -26,7 +26,7 @@ export function Quien() {
         <h2 className="quien__titulo">Compramos como para nuestra mesa.</h2>
 
         <div className="quien__retrato">
-          <Illa gesto="canasta" titulo="Illa con su canasta llena de la compra del día" />
+          <IllaViva gesto="canasta" titulo="Illa con su canasta llena de la compra del día" />
           <p className="mano-etiqueta">{MANO.quien}</p>
         </div>
 

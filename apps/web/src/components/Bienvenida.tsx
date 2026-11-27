@@ -2,7 +2,9 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Illa, Logo, MARCA } from "@illari/ui";
+import { Logo, MARCA } from "@illari/ui";
+import { EVENTO_BIENVENIDA_CERRADA } from "./Escribiendo";
+import { IllaViva } from "./IllaViva";
 import { iniciarSonido, reproducir } from "@/lib/sonido";
 
 const CLAVE_VISTA = "illari:bienvenida";
@@ -83,6 +85,7 @@ export function Bienvenida() {
     }
     document.documentElement.dataset.bienvenida = "vista";
     setAbierta(false);
+    window.dispatchEvent(new Event(EVENTO_BIENVENIDA_CERRADA));
     // El audio necesita un instante para despertar tras el toque.
     window.setTimeout(() => reproducir("amanecer"), 140);
   }, []);
@@ -161,7 +164,7 @@ export function Bienvenida() {
               </div>
 
               <div className="bienvenida__illa">
-                <Illa gesto="saluda" />
+                <IllaViva gesto="saluda" />
               </div>
             </div>
           </div>

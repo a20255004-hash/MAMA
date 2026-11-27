@@ -886,6 +886,10 @@ svg {
   height: auto;
 }
 
+.illa-viva.pedir__illa {
+  width: 11rem;
+}
+
 .pedir__listo h3 {
   font-family: var(--f-titulo);
   font-size: var(--t-xl);
@@ -1067,7 +1071,7 @@ svg {
 
 .guia__illa {
   flex: none;
-  width: 3.75rem;
+  width: 5rem;
   padding: 0;
   background: none;
   border: 0;
@@ -1083,7 +1087,7 @@ svg {
 
 @media (min-width: 62rem) {
   .guia__illa {
-    width: 5rem;
+    width: 7rem;
   }
 }
 
@@ -1394,4 +1398,29 @@ html[data-bienvenida="vista"] .bienvenida {
 .pie__legal a {
   color: var(--accion-osc);
   text-underline-offset: 3px;
+}
+
+/* Illa en 3D: ocupa el mismo espacio que la Illa ilustrada (proporcion 4 a 5). */
+.illa-viva {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.illa-viva:active {
+  cursor: grabbing;
+}
+
+.illa-viva canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.illa-viva > svg {
+  width: 100%;
+  height: 100%;
 }

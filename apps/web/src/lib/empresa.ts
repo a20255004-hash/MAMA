@@ -10,7 +10,7 @@ export const EMPRESA: {
   horario: string | null;
 } = {
   razonSocial: null,
-  ruc: null,
+  ruc: "10758326387",
   domicilio: null,
   correo: null,
   horario: null,
